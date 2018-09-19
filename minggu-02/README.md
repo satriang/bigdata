@@ -1,4 +1,4 @@
-# Tutorial Python
+# Tutorial belajar Python
 
 
 ## Bab 2
@@ -14,12 +14,14 @@ Type "help", "copyright", "credits" or "license" for more information.
 ... 
 Be Carefull not to fall off!
 
+*Perintah Untuk mengawali dalam penggunaan bahasa pemrograma Python* 
 ## Bab 3
 
 ### 3.1.1 Angka
 .>>> 2+2
 
 4
+
 
 .>>> 50 - 5
 
@@ -87,6 +89,8 @@ NameError: name 'n' is not defined
 .>>> round(_, 2)
 
 113.06
+
+*dari bagian diatas merupakan cara menggunakan berbagai macam operasi matematika dengan bahasa program python*
 
 ### 3.1.2 String
 
@@ -386,6 +390,8 @@ TypeError: 'str' object does not support item assignment
 
 'b'
 
+*dari bagian diatas merupakan cara-cara yang digunakan untuk melakukkan pengolahan untuk string dimulai dari membentuk kata, menghitung banyaknya huruf sampai mengambil beberapa huruf yang ada di dalam variabel* 
+
 ### 3.2
 
 .>>> a, b = 0, 1
@@ -430,6 +436,8 @@ The value of i is 65536
 
 0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,>>>
 
+*bagian diatas merupakan bentuk dari penggunaan while yang pada kasus diaatas di gunakan untuk menentukan bilangan berapa saja yang termasuk bilangan fibonasi*
+
 ##Bab 4
 
 .>>> x = int(input("Please enter an integer: "))
@@ -458,6 +466,8 @@ Please enter an integer: 42
 
 More
 
+*Dari bagian diatas merupakan cara penggunaan notasi if pada bahasa program python*
+
 .>>> words = ['cat', 'window', 'defenestrate']
 
 .>>> for w in words:
@@ -472,6 +482,8 @@ window 6
 
 defenestrate 12
 
+*Bagian diatas ialah menampilkan isi dari variabel yang di atur secara array* 
+
 .>>> for w in words[:]:
 
 ...     if len(w) > 6:
@@ -483,6 +495,8 @@ defenestrate 12
 .>>> words
 
 ['defenestrate', 'cat', 'window', 'defenestrate']
+
+*Contoh diatas merupakan kombinasi antara penggunaan statement if dan for*
 
 .>>> for i in range(5):
 
@@ -500,6 +514,8 @@ defenestrate 12
 
 4
 
+*menampilkan 5 bilangan dimulai dari 0 dengan menggunakan statement for untuk membuat perulangan*
+ 
 .>>> range(5, 10)
 
 range(5, 10)
@@ -520,6 +536,7 @@ range(5, 10)
 
 9
 
+*dari bagian diatas merupakan fungsi perulangan untuk menampilkan bilangan yang dimulai dari angka 5 sampai dengan kurang dari 10 
 .>>> for i in range(0, 10, 3):
 
 ...     print(i)
@@ -534,6 +551,8 @@ range(5, 10)
 
 9
 
+*menampilkan bilangan yang dimulai dari 0 sampai kurang dari 10 yang berkelipatan 3*
+
 .>>> for i in range(-10, -100, -30):
 
 ...     print(i)
@@ -545,6 +564,8 @@ range(5, 10)
 -40
 
 -70
+
+*menampilkan bilangan yang dimulai dari -10 sampai kurang dari -100 yang berkelipatan -30*
 
 .>>> a = ['Mary', 'had', 'a', 'little', 'lamb']
 
@@ -564,10 +585,13 @@ range(5, 10)
 
 4 lamb
 
+*menampilkan index kata yang terdapat pada suatu variabel array*
+
 .>>> print(range(10))
 
 range(0, 10)
 
+*
 .>>> list(range(5))
 
 [0, 1, 2, 3, 4]
@@ -604,6 +628,8 @@ range(0, 10)
 
 9 equals 3 * 3
 
+*dari bagian diatas digunakan untuk menentukan bilangan utama*
+
 .>>> for num in range(2, 10):
 
 ...  if num % 2 == 0:
@@ -631,6 +657,8 @@ Found a number 7
 Found an even number 8
 
 Found a number 9
+
+*dari bagian diatas untuk menentukan bilangan ganjil genap*
 
 .>>> while True:
 
@@ -664,6 +692,9 @@ KeyboardInterrupt
 
 ... 
 
+*pass digunakan untuk sebuah sintak tidak perlu di jalankan*
+
+
 .>>> def fib(n):
 
 ...  """Print a Fibonacci series up to n."""
@@ -684,6 +715,8 @@ KeyboardInterrupt
 
 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 
 
+*menampilkan bilangan fibonasi dengan batas tertentu*
+
 .>>> fib
 
 <function fib at 0x7f7c6a8c6f28>
@@ -693,6 +726,8 @@ KeyboardInterrupt
 .>>> f(100)
 
 0 1 1 2 3 5 8 13 21 34 55 89 
+
+*menginisialkan sebuah variabel*
 
 .>>> fib(0)
 
@@ -723,6 +758,10 @@ None
 .>>> f100
 
 [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+
+
+*returnpernyataan kembali dengan nilai dari fungsi. result.append(a)memanggil metode objek daftar result*
+
 
 .>>> def ask_ok(prompt, retries=4, reminder='Please try again!'):
 
@@ -771,6 +810,8 @@ Come on, only yes or no!
 OK to overwrite the file?n
 
 False
+
+*dari bagian diatas untuk membuat beberapa nilai default argumen*
 
 .>>> i = 5
 
@@ -825,23 +866,8 @@ SyntaxError: invalid syntax
 
 [1, 2, 3]
 
-.>>> def function(a):
+*dari bagian diatasmembuat definisi di dalam ruang lingkup dari varabel yang di beri nilai di awal*
 
-..  pass
-
-... 
-
-.>>> function(0, a=0)
-
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: function() got multiple values for argument 'a'
-
-.>>> def concat(*args, sep="/"):
-
-...  return sep.join(args)
-
-... 
 
 .>>> concat("earth", "mars", "venus")
 
@@ -850,6 +876,8 @@ TypeError: function() got multiple values for argument 'a'
 .>>> concat("earth", "mars", "venus", sep=".")
 
 'earth.mars.venus'
+
+*dari bagian merupakan pembuatan beberapa pilihan tertentu* 
 
 .>>> list(range(3, 6))
 
@@ -861,21 +889,8 @@ TypeError: function() got multiple values for argument 'a'
 
 [3, 4, 5]
 
-.>>> def parrot(voltage, state='a stiff', action='voom'):
+*dari bagian diatas merupakan beberapa cara untuk mengetahui batas range dalam suatu bilangan*
 
-...  print("-- This parrot wouldn't", action, end=' ')
-
-...  print("if you put", voltage, "volts through it.", end=' ')
-
-...  print("E's", state, "!")
-
-... 
-
-.>>> d = {"voltage": "four million", "state": "bleedin' demised", "action": "VOOM"}
-
-.>>> parrot(**d)
-
--- This parrot wouldn't VOOM if you put four million volts through it. E's bleedin' demised !
 
 .>>> def make_incrementor(n):
 
@@ -901,6 +916,8 @@ TypeError: function() got multiple values for argument 'a'
 
 [(4, 'four'), (1, 'one'), (3, 'three'), (2, 'two')]
 
+*dari bagian diatas merupakan penggunaan lambda. Fungsi ini digunakan untuk mengembalikan jumlah dari dua argumen*
+
 .>>> def my_function():
 
 ...  """Do nothing, but document it.
@@ -920,6 +937,8 @@ TypeError: function() got multiple values for argument 'a'
 Do nothing, but document it.
  
  No, really, it doesn't do anything.
+
+*dari bagian diatas merupakan suatu literasi untuk membuat rangkaian kata-kata dengan suatu tatanan penulisan*
  
 .>>> def f(ham: str, eggs: str = 'eggs') -> str:
 
@@ -936,3 +955,5 @@ Do nothing, but document it.
 Annotations: {'ham': <class 'str'>, 'eggs': <class 'str'>, 'return': <class 'str'>}
 Arguments: spam eggs
 'spam and eggs'
+
+*dari bagian diatas Anotasi fungsi informasi metadata opsional tentang jenis yang digunakan oleh fungsi yang ditentukan pengguna*
