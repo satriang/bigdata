@@ -96,4 +96,36 @@ print queue.popleft()
 
 Eric
 
-*menampilkan list yang berada disebelah kiri yang terdapat pada variabel*
+queue.popleft()                
+
+print queue  
+
+deque(['Michael', 'Terry', 'Graham'])
+
+*menghilangkan 2 list yang berada paling kiri dan menambahkan data baru di dalam variabel*
+
+
+## Bab 5.1.3
+
+squares = []
+
+for x in range(10):
+
+>    squares.append(x**2)
+
+print squares
+
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+*menambahkan bilangan kuadrat pada variabel menggunakan perulangan for*
+```bash
+>>> combs = []
+>>>
+>>> for x in [1,2,3]:
+...     for y in [3,1,4]:
+...         if x != y:
+...             combs.append((x, y))
+...
+>>> print combs
+[(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]
+```
