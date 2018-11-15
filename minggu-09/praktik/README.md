@@ -26,5 +26,5 @@ Untuk instalasi Jupyter Notebook dapat menggunakan beberapa cara. Bisa menggunak
 * Selanjutnya ketikkan perintah *python3 -m pip install jupyter* untuk memulai instalasi. Pada proses ini yaitu mendownload package Jupypter Notebook. 
 * Setelah proses Download dan instalasi sudah selesai jalankan perintah *jupyter notebook* untuk mencoba menjalankan server jupyter notebook. 
 * Jika berhasil maka web browser akan tampil dan akan muncul gambar dibawah ini
-![Gambar Web Server Jupyter Notebook](/../praktik/src/sc.png)
+![Gambar Web Server Jupyter Notebook](https://drive.google.com/open?id=1uKJQxZQHcXFxF5THeT2mliGJXfTptf_l)
 
