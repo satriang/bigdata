@@ -28,3 +28,9 @@ Untuk instalasi Jupyter Notebook dapat menggunakan beberapa cara. Bisa menggunak
 * Jika berhasil maka web browser akan tampil dan akan muncul gambar dibawah ini
 ![Gambar Web Server Jupyter Notebook](https://github.com/satriang/bigdata/tree/master/minggu-09/praktik/src/sc.png)
 
+# Cara menggunakan Jupyter untuk interactive computing di Python
+* Buka terminal kemudian ketikkan perintah *jupyter notebook*
+* Setelah itu browser akan menuju ke *http://localhost:8888/tree*
+* Klik "New" pada bagian kanan atas kemudian pilih *Python 3*
+* Maka akan muncul sejenis text editor python
+
