@@ -13,8 +13,6 @@ state_fruit = pd.read_csv('data/state_fruit.csv', index_col=0)
 state_fruit
 ```
 
-## Hasil dari source code diatas
-
 
 <div>
 <style scoped>
@@ -117,7 +115,6 @@ state_fruit_tidy = state_fruit.stack().reset_index()
 state_fruit_tidy
 ```
 
-## Hasil dari source code diatas
 
 
 <div>
@@ -223,7 +220,6 @@ state_fruit_tidy.columns = ['state', 'fruit', 'weight']
 state_fruit_tidy
 ```
 
-## Hasil dari source code diatas
 
 
 <div>
@@ -365,8 +361,6 @@ state_fruit.stack()\
            .rename_axis(['state', 'fruit'])\
            .reset_index(name='weight')
 ```
-
-## Hasil dari source code diatas
 
 
 <div>
