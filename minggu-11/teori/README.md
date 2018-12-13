@@ -1488,19 +1488,20 @@ from IPython.display import display
 college = pd.read_csv('data/college.csv')
 different_cols = ['RELAFFIL', 'SATMTMID', 'CURROPER', 'INSTNM', 'STABBR']
 col2 = college.loc[:, different_cols]
-col2['STABBR'] = col2['STABBR'].astype('category')
-col2.dtypes
+new_mem = col2.memory_usage(deep=True)
+new_mem
 ```
 
+## Hasil dari source code diatas
 
-### Hasil dari source code diatas 
 
-    RELAFFIL       int64
-    SATMTMID     float64
-    CURROPER       int64
-    INSTNM        object
-    STABBR      category
-    dtype: object
+    Index           80
+    RELAFFIL     60280
+    SATMTMID     60280
+    CURROPER     60280
+    INSTNM      660240
+    STABBR      444565
+    dtype: int64
 
 
 
@@ -1508,3 +1509,2704 @@ col2.dtypes
 ```python
 
 ```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+college = pd.read_csv('data/college.csv')
+different_cols = ['RELAFFIL', 'SATMTMID', 'CURROPER', 'INSTNM', 'STABBR']
+col2 = college.loc[:, different_cols]
+original_mem = col2.memory_usage(deep=True)
+col2['RELAFFIL'] = col2['RELAFFIL'].astype(np.int8)
+col2['STABBR'] = col2['STABBR'].astype('category')
+new_mem = col2.memory_usage(deep=True)
+new_mem / original_mem
+```
+
+## Hasil dari source code diatas
+
+
+    Index       1.000000
+    RELAFFIL    0.125000
+    SATMTMID    1.000000
+    CURROPER    1.000000
+    INSTNM      1.000000
+    STABBR      0.030538
+    dtype: float64
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+college = pd.read_csv('data/college.csv')
+college[['CURROPER', 'INSTNM']].memory_usage(deep=True)
+```
+
+## Hasil dari source code diatas
+
+
+    Index           80
+    CURROPER     60280
+    INSTNM      660240
+    dtype: int64
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+college = pd.read_csv('data/college.csv')
+college.loc[0, 'CURROPER'] = 10000000
+college.loc[0, 'INSTNM'] = college.loc[0, 'INSTNM'] + 'a'
+# college.loc[1, 'INSTNM'] = college.loc[1, 'INSTNM'] + 'a'
+college[['CURROPER', 'INSTNM']].memory_usage(deep=True)
+```
+
+## Hasil dari source code diatas
+
+
+    Index           80
+    CURROPER     60280
+    INSTNM      660345
+    dtype: int64
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+college = pd.read_csv('data/college.csv')
+college['MENONLY'].dtype
+```
+
+
+## Hasil dari source cod diatas
+
+    dtype('float64')
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+college = pd.read_csv('data/college.csv')
+college['MENONLY'].astype('int8')
+```
+
+## Hasil dari source code diatas
+
+    ---------------------------------------------------------------------------
+
+    ValueError                                Traceback (most recent call last)
+
+    <ipython-input-26-42da94a021c3> in <module>
+          1 college = pd.read_csv('data/college.csv')
+    ----> 2 college['MENONLY'].astype('int8')
+    
+
+    ~/miniconda3/lib/python3.6/site-packages/pandas/util/_decorators.py in wrapper(*args, **kwargs)
+        176                 else:
+        177                     kwargs[new_arg_name] = new_arg_value
+    --> 178             return func(*args, **kwargs)
+        179         return wrapper
+        180     return _deprecate_kwarg
+
+
+    ~/miniconda3/lib/python3.6/site-packages/pandas/core/generic.py in astype(self, dtype, copy, errors, **kwargs)
+       4999             # else, only a single dtype is given
+       5000             new_data = self._data.astype(dtype=dtype, copy=copy, errors=errors,
+    -> 5001                                          **kwargs)
+       5002             return self._constructor(new_data).__finalize__(self)
+       5003 
+
+
+    ~/miniconda3/lib/python3.6/site-packages/pandas/core/internals.py in astype(self, dtype, **kwargs)
+       3712 
+       3713     def astype(self, dtype, **kwargs):
+    -> 3714         return self.apply('astype', dtype=dtype, **kwargs)
+       3715 
+       3716     def convert(self, **kwargs):
+
+
+    ~/miniconda3/lib/python3.6/site-packages/pandas/core/internals.py in apply(self, f, axes, filter, do_integrity_check, consolidate, **kwargs)
+       3579 
+       3580             kwargs['mgr'] = self
+    -> 3581             applied = getattr(b, f)(**kwargs)
+       3582             result_blocks = _extend_blocks(applied, result_blocks)
+       3583 
+
+
+    ~/miniconda3/lib/python3.6/site-packages/pandas/core/internals.py in astype(self, dtype, copy, errors, values, **kwargs)
+        573     def astype(self, dtype, copy=False, errors='raise', values=None, **kwargs):
+        574         return self._astype(dtype, copy=copy, errors=errors, values=values,
+    --> 575                             **kwargs)
+        576 
+        577     def _astype(self, dtype, copy=False, errors='raise', values=None,
+
+
+    ~/miniconda3/lib/python3.6/site-packages/pandas/core/internals.py in _astype(self, dtype, copy, errors, values, klass, mgr, **kwargs)
+        662 
+        663                 # _astype_nansafe works fine with 1-d only
+    --> 664                 values = astype_nansafe(values.ravel(), dtype, copy=True)
+        665                 values = values.reshape(self.shape)
+        666 
+
+
+    ~/miniconda3/lib/python3.6/site-packages/pandas/core/dtypes/cast.py in astype_nansafe(arr, dtype, copy)
+        700 
+        701         if not np.isfinite(arr).all():
+    --> 702             raise ValueError('Cannot convert non-finite values (NA or inf) to '
+        703                              'integer')
+        704 
+
+
+    ValueError: Cannot convert non-finite values (NA or inf) to integer
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+college = pd.read_csv('data/college.csv')
+college.describe(include=['int64', 'float64']).T
+```
+
+## Hasil dari source code diatas
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>HBCU</th>
+      <td>7164.0</td>
+      <td>0.014238</td>
+      <td>0.118478</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>MENONLY</th>
+      <td>7164.0</td>
+      <td>0.009213</td>
+      <td>0.095546</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>WOMENONLY</th>
+      <td>7164.0</td>
+      <td>0.005304</td>
+      <td>0.072642</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>RELAFFIL</th>
+      <td>7535.0</td>
+      <td>0.190975</td>
+      <td>0.393096</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>SATVRMID</th>
+      <td>1185.0</td>
+      <td>522.819409</td>
+      <td>68.578862</td>
+      <td>290.0</td>
+      <td>475.000000</td>
+      <td>510.00000</td>
+      <td>555.000000</td>
+      <td>765.0000</td>
+    </tr>
+    <tr>
+      <th>SATMTMID</th>
+      <td>1196.0</td>
+      <td>530.765050</td>
+      <td>73.469767</td>
+      <td>310.0</td>
+      <td>482.000000</td>
+      <td>520.00000</td>
+      <td>565.000000</td>
+      <td>785.0000</td>
+    </tr>
+    <tr>
+      <th>DISTANCEONLY</th>
+      <td>7164.0</td>
+      <td>0.005583</td>
+      <td>0.074519</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS</th>
+      <td>6874.0</td>
+      <td>2356.837940</td>
+      <td>5474.275871</td>
+      <td>0.0</td>
+      <td>117.000000</td>
+      <td>412.50000</td>
+      <td>1929.500000</td>
+      <td>151558.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_WHITE</th>
+      <td>6874.0</td>
+      <td>0.510207</td>
+      <td>0.286958</td>
+      <td>0.0</td>
+      <td>0.267500</td>
+      <td>0.55570</td>
+      <td>0.747875</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_BLACK</th>
+      <td>6874.0</td>
+      <td>0.189997</td>
+      <td>0.224587</td>
+      <td>0.0</td>
+      <td>0.036125</td>
+      <td>0.10005</td>
+      <td>0.257700</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_HISP</th>
+      <td>6874.0</td>
+      <td>0.161635</td>
+      <td>0.221854</td>
+      <td>0.0</td>
+      <td>0.027600</td>
+      <td>0.07140</td>
+      <td>0.198875</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_ASIAN</th>
+      <td>6874.0</td>
+      <td>0.033544</td>
+      <td>0.073777</td>
+      <td>0.0</td>
+      <td>0.002500</td>
+      <td>0.01290</td>
+      <td>0.032700</td>
+      <td>0.9727</td>
+    </tr>
+    <tr>
+      <th>UGDS_AIAN</th>
+      <td>6874.0</td>
+      <td>0.013813</td>
+      <td>0.070196</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00260</td>
+      <td>0.007300</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_NHPI</th>
+      <td>6874.0</td>
+      <td>0.004569</td>
+      <td>0.033125</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.002500</td>
+      <td>0.9983</td>
+    </tr>
+    <tr>
+      <th>UGDS_2MOR</th>
+      <td>6874.0</td>
+      <td>0.023950</td>
+      <td>0.031288</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.01750</td>
+      <td>0.033900</td>
+      <td>0.5333</td>
+    </tr>
+    <tr>
+      <th>UGDS_NRA</th>
+      <td>6874.0</td>
+      <td>0.016086</td>
+      <td>0.050172</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.011700</td>
+      <td>0.9286</td>
+    </tr>
+    <tr>
+      <th>UGDS_UNKN</th>
+      <td>6874.0</td>
+      <td>0.045181</td>
+      <td>0.093440</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.01430</td>
+      <td>0.045400</td>
+      <td>0.9027</td>
+    </tr>
+    <tr>
+      <th>PPTUG_EF</th>
+      <td>6853.0</td>
+      <td>0.226639</td>
+      <td>0.246470</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.15040</td>
+      <td>0.376900</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>CURROPER</th>
+      <td>7535.0</td>
+      <td>0.923291</td>
+      <td>0.266146</td>
+      <td>0.0</td>
+      <td>1.000000</td>
+      <td>1.00000</td>
+      <td>1.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>PCTPELL</th>
+      <td>6849.0</td>
+      <td>0.530643</td>
+      <td>0.225544</td>
+      <td>0.0</td>
+      <td>0.357800</td>
+      <td>0.52150</td>
+      <td>0.712900</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>PCTFLOAN</th>
+      <td>6849.0</td>
+      <td>0.522211</td>
+      <td>0.283616</td>
+      <td>0.0</td>
+      <td>0.332900</td>
+      <td>0.58330</td>
+      <td>0.745000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UG25ABV</th>
+      <td>6718.0</td>
+      <td>0.410021</td>
+      <td>0.228939</td>
+      <td>0.0</td>
+      <td>0.241500</td>
+      <td>0.40075</td>
+      <td>0.572275</td>
+      <td>1.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+college = pd.read_csv('data/college.csv')
+college.describe(include=[np.int64, np.float64]).T
+```
+
+## Hasil dari source code diatas
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>HBCU</th>
+      <td>7164.0</td>
+      <td>0.014238</td>
+      <td>0.118478</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>MENONLY</th>
+      <td>7164.0</td>
+      <td>0.009213</td>
+      <td>0.095546</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>WOMENONLY</th>
+      <td>7164.0</td>
+      <td>0.005304</td>
+      <td>0.072642</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>RELAFFIL</th>
+      <td>7535.0</td>
+      <td>0.190975</td>
+      <td>0.393096</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>SATVRMID</th>
+      <td>1185.0</td>
+      <td>522.819409</td>
+      <td>68.578862</td>
+      <td>290.0</td>
+      <td>475.000000</td>
+      <td>510.00000</td>
+      <td>555.000000</td>
+      <td>765.0000</td>
+    </tr>
+    <tr>
+      <th>SATMTMID</th>
+      <td>1196.0</td>
+      <td>530.765050</td>
+      <td>73.469767</td>
+      <td>310.0</td>
+      <td>482.000000</td>
+      <td>520.00000</td>
+      <td>565.000000</td>
+      <td>785.0000</td>
+    </tr>
+    <tr>
+      <th>DISTANCEONLY</th>
+      <td>7164.0</td>
+      <td>0.005583</td>
+      <td>0.074519</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS</th>
+      <td>6874.0</td>
+      <td>2356.837940</td>
+      <td>5474.275871</td>
+      <td>0.0</td>
+      <td>117.000000</td>
+      <td>412.50000</td>
+      <td>1929.500000</td>
+      <td>151558.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_WHITE</th>
+      <td>6874.0</td>
+      <td>0.510207</td>
+      <td>0.286958</td>
+      <td>0.0</td>
+      <td>0.267500</td>
+      <td>0.55570</td>
+      <td>0.747875</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_BLACK</th>
+      <td>6874.0</td>
+      <td>0.189997</td>
+      <td>0.224587</td>
+      <td>0.0</td>
+      <td>0.036125</td>
+      <td>0.10005</td>
+      <td>0.257700</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_HISP</th>
+      <td>6874.0</td>
+      <td>0.161635</td>
+      <td>0.221854</td>
+      <td>0.0</td>
+      <td>0.027600</td>
+      <td>0.07140</td>
+      <td>0.198875</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_ASIAN</th>
+      <td>6874.0</td>
+      <td>0.033544</td>
+      <td>0.073777</td>
+      <td>0.0</td>
+      <td>0.002500</td>
+      <td>0.01290</td>
+      <td>0.032700</td>
+      <td>0.9727</td>
+    </tr>
+    <tr>
+      <th>UGDS_AIAN</th>
+      <td>6874.0</td>
+      <td>0.013813</td>
+      <td>0.070196</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00260</td>
+      <td>0.007300</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_NHPI</th>
+      <td>6874.0</td>
+      <td>0.004569</td>
+      <td>0.033125</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.002500</td>
+      <td>0.9983</td>
+    </tr>
+    <tr>
+      <th>UGDS_2MOR</th>
+      <td>6874.0</td>
+      <td>0.023950</td>
+      <td>0.031288</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.01750</td>
+      <td>0.033900</td>
+      <td>0.5333</td>
+    </tr>
+    <tr>
+      <th>UGDS_NRA</th>
+      <td>6874.0</td>
+      <td>0.016086</td>
+      <td>0.050172</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.011700</td>
+      <td>0.9286</td>
+    </tr>
+    <tr>
+      <th>UGDS_UNKN</th>
+      <td>6874.0</td>
+      <td>0.045181</td>
+      <td>0.093440</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.01430</td>
+      <td>0.045400</td>
+      <td>0.9027</td>
+    </tr>
+    <tr>
+      <th>PPTUG_EF</th>
+      <td>6853.0</td>
+      <td>0.226639</td>
+      <td>0.246470</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.15040</td>
+      <td>0.376900</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>CURROPER</th>
+      <td>7535.0</td>
+      <td>0.923291</td>
+      <td>0.266146</td>
+      <td>0.0</td>
+      <td>1.000000</td>
+      <td>1.00000</td>
+      <td>1.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>PCTPELL</th>
+      <td>6849.0</td>
+      <td>0.530643</td>
+      <td>0.225544</td>
+      <td>0.0</td>
+      <td>0.357800</td>
+      <td>0.52150</td>
+      <td>0.712900</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>PCTFLOAN</th>
+      <td>6849.0</td>
+      <td>0.522211</td>
+      <td>0.283616</td>
+      <td>0.0</td>
+      <td>0.332900</td>
+      <td>0.58330</td>
+      <td>0.745000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UG25ABV</th>
+      <td>6718.0</td>
+      <td>0.410021</td>
+      <td>0.228939</td>
+      <td>0.0</td>
+      <td>0.241500</td>
+      <td>0.40075</td>
+      <td>0.572275</td>
+      <td>1.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+college = pd.read_csv('data/college.csv')
+college['RELAFFIL'] = college['RELAFFIL'].astype(np.int8)
+college.describe(include=['int', 'float']).T  # defaults to 64 bit int/floats
+```
+
+##Hasil dari source code diatas
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>HBCU</th>
+      <td>7164.0</td>
+      <td>0.014238</td>
+      <td>0.118478</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>MENONLY</th>
+      <td>7164.0</td>
+      <td>0.009213</td>
+      <td>0.095546</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>WOMENONLY</th>
+      <td>7164.0</td>
+      <td>0.005304</td>
+      <td>0.072642</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>SATVRMID</th>
+      <td>1185.0</td>
+      <td>522.819409</td>
+      <td>68.578862</td>
+      <td>290.0</td>
+      <td>475.000000</td>
+      <td>510.00000</td>
+      <td>555.000000</td>
+      <td>765.0000</td>
+    </tr>
+    <tr>
+      <th>SATMTMID</th>
+      <td>1196.0</td>
+      <td>530.765050</td>
+      <td>73.469767</td>
+      <td>310.0</td>
+      <td>482.000000</td>
+      <td>520.00000</td>
+      <td>565.000000</td>
+      <td>785.0000</td>
+    </tr>
+    <tr>
+      <th>DISTANCEONLY</th>
+      <td>7164.0</td>
+      <td>0.005583</td>
+      <td>0.074519</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS</th>
+      <td>6874.0</td>
+      <td>2356.837940</td>
+      <td>5474.275871</td>
+      <td>0.0</td>
+      <td>117.000000</td>
+      <td>412.50000</td>
+      <td>1929.500000</td>
+      <td>151558.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_WHITE</th>
+      <td>6874.0</td>
+      <td>0.510207</td>
+      <td>0.286958</td>
+      <td>0.0</td>
+      <td>0.267500</td>
+      <td>0.55570</td>
+      <td>0.747875</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_BLACK</th>
+      <td>6874.0</td>
+      <td>0.189997</td>
+      <td>0.224587</td>
+      <td>0.0</td>
+      <td>0.036125</td>
+      <td>0.10005</td>
+      <td>0.257700</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_HISP</th>
+      <td>6874.0</td>
+      <td>0.161635</td>
+      <td>0.221854</td>
+      <td>0.0</td>
+      <td>0.027600</td>
+      <td>0.07140</td>
+      <td>0.198875</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_ASIAN</th>
+      <td>6874.0</td>
+      <td>0.033544</td>
+      <td>0.073777</td>
+      <td>0.0</td>
+      <td>0.002500</td>
+      <td>0.01290</td>
+      <td>0.032700</td>
+      <td>0.9727</td>
+    </tr>
+    <tr>
+      <th>UGDS_AIAN</th>
+      <td>6874.0</td>
+      <td>0.013813</td>
+      <td>0.070196</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00260</td>
+      <td>0.007300</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_NHPI</th>
+      <td>6874.0</td>
+      <td>0.004569</td>
+      <td>0.033125</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.002500</td>
+      <td>0.9983</td>
+    </tr>
+    <tr>
+      <th>UGDS_2MOR</th>
+      <td>6874.0</td>
+      <td>0.023950</td>
+      <td>0.031288</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.01750</td>
+      <td>0.033900</td>
+      <td>0.5333</td>
+    </tr>
+    <tr>
+      <th>UGDS_NRA</th>
+      <td>6874.0</td>
+      <td>0.016086</td>
+      <td>0.050172</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.011700</td>
+      <td>0.9286</td>
+    </tr>
+    <tr>
+      <th>UGDS_UNKN</th>
+      <td>6874.0</td>
+      <td>0.045181</td>
+      <td>0.093440</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.01430</td>
+      <td>0.045400</td>
+      <td>0.9027</td>
+    </tr>
+    <tr>
+      <th>PPTUG_EF</th>
+      <td>6853.0</td>
+      <td>0.226639</td>
+      <td>0.246470</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.15040</td>
+      <td>0.376900</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>CURROPER</th>
+      <td>7535.0</td>
+      <td>0.923291</td>
+      <td>0.266146</td>
+      <td>0.0</td>
+      <td>1.000000</td>
+      <td>1.00000</td>
+      <td>1.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>PCTPELL</th>
+      <td>6849.0</td>
+      <td>0.530643</td>
+      <td>0.225544</td>
+      <td>0.0</td>
+      <td>0.357800</td>
+      <td>0.52150</td>
+      <td>0.712900</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>PCTFLOAN</th>
+      <td>6849.0</td>
+      <td>0.522211</td>
+      <td>0.283616</td>
+      <td>0.0</td>
+      <td>0.332900</td>
+      <td>0.58330</td>
+      <td>0.745000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UG25ABV</th>
+      <td>6718.0</td>
+      <td>0.410021</td>
+      <td>0.228939</td>
+      <td>0.0</td>
+      <td>0.241500</td>
+      <td>0.40075</td>
+      <td>0.572275</td>
+      <td>1.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+college = pd.read_csv('data/college.csv')
+college['RELAFFIL'] = college['RELAFFIL'].astype(np.int8)
+college.describe(include=['number']).T  # also works as the default int/float are 64 bits
+```
+
+## Hasil dari source code diatas
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>HBCU</th>
+      <td>7164.0</td>
+      <td>0.014238</td>
+      <td>0.118478</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>MENONLY</th>
+      <td>7164.0</td>
+      <td>0.009213</td>
+      <td>0.095546</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>WOMENONLY</th>
+      <td>7164.0</td>
+      <td>0.005304</td>
+      <td>0.072642</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>RELAFFIL</th>
+      <td>7535.0</td>
+      <td>0.190975</td>
+      <td>0.393096</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>SATVRMID</th>
+      <td>1185.0</td>
+      <td>522.819409</td>
+      <td>68.578862</td>
+      <td>290.0</td>
+      <td>475.000000</td>
+      <td>510.00000</td>
+      <td>555.000000</td>
+      <td>765.0000</td>
+    </tr>
+    <tr>
+      <th>SATMTMID</th>
+      <td>1196.0</td>
+      <td>530.765050</td>
+      <td>73.469767</td>
+      <td>310.0</td>
+      <td>482.000000</td>
+      <td>520.00000</td>
+      <td>565.000000</td>
+      <td>785.0000</td>
+    </tr>
+    <tr>
+      <th>DISTANCEONLY</th>
+      <td>7164.0</td>
+      <td>0.005583</td>
+      <td>0.074519</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS</th>
+      <td>6874.0</td>
+      <td>2356.837940</td>
+      <td>5474.275871</td>
+      <td>0.0</td>
+      <td>117.000000</td>
+      <td>412.50000</td>
+      <td>1929.500000</td>
+      <td>151558.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_WHITE</th>
+      <td>6874.0</td>
+      <td>0.510207</td>
+      <td>0.286958</td>
+      <td>0.0</td>
+      <td>0.267500</td>
+      <td>0.55570</td>
+      <td>0.747875</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_BLACK</th>
+      <td>6874.0</td>
+      <td>0.189997</td>
+      <td>0.224587</td>
+      <td>0.0</td>
+      <td>0.036125</td>
+      <td>0.10005</td>
+      <td>0.257700</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_HISP</th>
+      <td>6874.0</td>
+      <td>0.161635</td>
+      <td>0.221854</td>
+      <td>0.0</td>
+      <td>0.027600</td>
+      <td>0.07140</td>
+      <td>0.198875</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_ASIAN</th>
+      <td>6874.0</td>
+      <td>0.033544</td>
+      <td>0.073777</td>
+      <td>0.0</td>
+      <td>0.002500</td>
+      <td>0.01290</td>
+      <td>0.032700</td>
+      <td>0.9727</td>
+    </tr>
+    <tr>
+      <th>UGDS_AIAN</th>
+      <td>6874.0</td>
+      <td>0.013813</td>
+      <td>0.070196</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00260</td>
+      <td>0.007300</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UGDS_NHPI</th>
+      <td>6874.0</td>
+      <td>0.004569</td>
+      <td>0.033125</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.002500</td>
+      <td>0.9983</td>
+    </tr>
+    <tr>
+      <th>UGDS_2MOR</th>
+      <td>6874.0</td>
+      <td>0.023950</td>
+      <td>0.031288</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.01750</td>
+      <td>0.033900</td>
+      <td>0.5333</td>
+    </tr>
+    <tr>
+      <th>UGDS_NRA</th>
+      <td>6874.0</td>
+      <td>0.016086</td>
+      <td>0.050172</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>0.011700</td>
+      <td>0.9286</td>
+    </tr>
+    <tr>
+      <th>UGDS_UNKN</th>
+      <td>6874.0</td>
+      <td>0.045181</td>
+      <td>0.093440</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.01430</td>
+      <td>0.045400</td>
+      <td>0.9027</td>
+    </tr>
+    <tr>
+      <th>PPTUG_EF</th>
+      <td>6853.0</td>
+      <td>0.226639</td>
+      <td>0.246470</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.15040</td>
+      <td>0.376900</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>CURROPER</th>
+      <td>7535.0</td>
+      <td>0.923291</td>
+      <td>0.266146</td>
+      <td>0.0</td>
+      <td>1.000000</td>
+      <td>1.00000</td>
+      <td>1.000000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>PCTPELL</th>
+      <td>6849.0</td>
+      <td>0.530643</td>
+      <td>0.225544</td>
+      <td>0.0</td>
+      <td>0.357800</td>
+      <td>0.52150</td>
+      <td>0.712900</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>PCTFLOAN</th>
+      <td>6849.0</td>
+      <td>0.522211</td>
+      <td>0.283616</td>
+      <td>0.0</td>
+      <td>0.332900</td>
+      <td>0.58330</td>
+      <td>0.745000</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>UG25ABV</th>
+      <td>6718.0</td>
+      <td>0.410021</td>
+      <td>0.228939</td>
+      <td>0.0</td>
+      <td>0.241500</td>
+      <td>0.40075</td>
+      <td>0.572275</td>
+      <td>1.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+college = pd.read_csv('data/college.csv')
+college['MENONLY'] = college['MENONLY'].astype('float16')
+college['RELAFFIL'] = college['RELAFFIL'].astype('int8')
+college.index = pd.Int64Index(college.index)
+college.index.memory_usage()
+```
+
+## Hasil dari source code diatas
+
+
+    60280
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+movie = pd.read_csv('data/movie.csv')
+movie2 = movie[['movie_title', 'imdb_score', 'budget']]
+movie2.head()
+```
+
+##Hasil dari source code diatas
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>movie_title</th>
+      <th>imdb_score</th>
+      <th>budget</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Avatar</td>
+      <td>7.9</td>
+      <td>237000000.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Pirates of the Caribbean: At World's End</td>
+      <td>7.1</td>
+      <td>300000000.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Spectre</td>
+      <td>6.8</td>
+      <td>245000000.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>The Dark Knight Rises</td>
+      <td>8.5</td>
+      <td>250000000.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Star Wars: Episode VII - The Force Awakens</td>
+      <td>7.1</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+movie = pd.read_csv('data/movie.csv')
+movie2 = movie[['movie_title', 'imdb_score', 'budget']]
+movie2.nlargest(100, 'imdb_score').head()
+```
+
+##Hasil dari source code diatas
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>movie_title</th>
+      <th>imdb_score</th>
+      <th>budget</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2725</th>
+      <td>Towering Inferno</td>
+      <td>9.5</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1920</th>
+      <td>The Shawshank Redemption</td>
+      <td>9.3</td>
+      <td>25000000.0</td>
+    </tr>
+    <tr>
+      <th>3402</th>
+      <td>The Godfather</td>
+      <td>9.2</td>
+      <td>6000000.0</td>
+    </tr>
+    <tr>
+      <th>2779</th>
+      <td>Dekalog</td>
+      <td>9.1</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4312</th>
+      <td>Kickboxer: Vengeance</td>
+      <td>9.1</td>
+      <td>17000000.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+movie = pd.read_csv('data/movie.csv')
+movie2 = movie[['movie_title', 'imdb_score', 'budget']]
+movie2.nlargest(100, 'imdb_score').nsmallest(5, 'budget')
+```
+
+##Hasil dari source code diatas
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>movie_title</th>
+      <th>imdb_score</th>
+      <th>budget</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4804</th>
+      <td>Butterfly Girl</td>
+      <td>8.7</td>
+      <td>180000.0</td>
+    </tr>
+    <tr>
+      <th>4801</th>
+      <td>Children of Heaven</td>
+      <td>8.5</td>
+      <td>180000.0</td>
+    </tr>
+    <tr>
+      <th>4706</th>
+      <td>12 Angry Men</td>
+      <td>8.9</td>
+      <td>350000.0</td>
+    </tr>
+    <tr>
+      <th>4550</th>
+      <td>A Separation</td>
+      <td>8.4</td>
+      <td>500000.0</td>
+    </tr>
+    <tr>
+      <th>4636</th>
+      <td>The Other Dream Team</td>
+      <td>8.4</td>
+      <td>500000.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+movie = pd.read_csv('data/movie.csv')
+movie2 = movie[['movie_title', 'title_year', 'imdb_score']]
+movie2.sort_values('title_year', ascending=False).head()
+```
+
+## Hasil dari source code diatas
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>movie_title</th>
+      <th>title_year</th>
+      <th>imdb_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3884</th>
+      <td>The Veil</td>
+      <td>2016.0</td>
+      <td>4.7</td>
+    </tr>
+    <tr>
+      <th>2375</th>
+      <td>My Big Fat Greek Wedding 2</td>
+      <td>2016.0</td>
+      <td>6.1</td>
+    </tr>
+    <tr>
+      <th>2794</th>
+      <td>Miracles from Heaven</td>
+      <td>2016.0</td>
+      <td>6.8</td>
+    </tr>
+    <tr>
+      <th>92</th>
+      <td>Independence Day: Resurgence</td>
+      <td>2016.0</td>
+      <td>5.5</td>
+    </tr>
+    <tr>
+      <th>153</th>
+      <td>Kung Fu Panda 3</td>
+      <td>2016.0</td>
+      <td>7.2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+movie = pd.read_csv('data/movie.csv')
+movie2 = movie[['movie_title', 'title_year', 'imdb_score']]
+movie3 = movie2.sort_values(['title_year','imdb_score'], ascending=False)
+movie3.head()
+```
+
+##Hasil dari source code diatas
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>movie_title</th>
+      <th>title_year</th>
+      <th>imdb_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4312</th>
+      <td>Kickboxer: Vengeance</td>
+      <td>2016.0</td>
+      <td>9.1</td>
+    </tr>
+    <tr>
+      <th>4277</th>
+      <td>A Beginner's Guide to Snuff</td>
+      <td>2016.0</td>
+      <td>8.7</td>
+    </tr>
+    <tr>
+      <th>3798</th>
+      <td>Airlift</td>
+      <td>2016.0</td>
+      <td>8.5</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Captain America: Civil War</td>
+      <td>2016.0</td>
+      <td>8.2</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>Godzilla Resurgence</td>
+      <td>2016.0</td>
+      <td>8.2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+movie = pd.read_csv('data/movie.csv')
+movie2 = movie[['movie_title', 'title_year', 'imdb_score']]
+movie3 = movie2.sort_values(['title_year','imdb_score'], ascending=False)
+movie_top_year = movie3.drop_duplicates(subset='title_year')
+movie_top_year.head()
+```
+
+## Hasil dari source code diatas
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>movie_title</th>
+      <th>title_year</th>
+      <th>imdb_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4312</th>
+      <td>Kickboxer: Vengeance</td>
+      <td>2016.0</td>
+      <td>9.1</td>
+    </tr>
+    <tr>
+      <th>3745</th>
+      <td>Running Forever</td>
+      <td>2015.0</td>
+      <td>8.6</td>
+    </tr>
+    <tr>
+      <th>4369</th>
+      <td>Queen of the Mountains</td>
+      <td>2014.0</td>
+      <td>8.7</td>
+    </tr>
+    <tr>
+      <th>3935</th>
+      <td>Batman: The Dark Knight Returns, Part 2</td>
+      <td>2013.0</td>
+      <td>8.4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>The Dark Knight Rises</td>
+      <td>2012.0</td>
+      <td>8.5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+movie = pd.read_csv('data/movie.csv')
+movie2 = movie[['movie_title', 'title_year', 'imdb_score']]
+movie3 = movie2.sort_values(['title_year','imdb_score'], ascending=False)
+movie4 = movie[['movie_title', 'title_year', 'content_rating', 'budget']]
+movie4_sorted = movie4.sort_values(['title_year', 'content_rating', 'budget'], 
+                                   ascending=[False, False, True])
+movie4_sorted.drop_duplicates(subset=['title_year', 'content_rating']).head(10)
+```
+
+##Hasil dari source code diatas
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>movie_title</th>
+      <th>title_year</th>
+      <th>content_rating</th>
+      <th>budget</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4026</th>
+      <td>Compadres</td>
+      <td>2016.0</td>
+      <td>R</td>
+      <td>3000000.0</td>
+    </tr>
+    <tr>
+      <th>4658</th>
+      <td>Fight to the Finish</td>
+      <td>2016.0</td>
+      <td>PG-13</td>
+      <td>150000.0</td>
+    </tr>
+    <tr>
+      <th>4661</th>
+      <td>Rodeo Girl</td>
+      <td>2016.0</td>
+      <td>PG</td>
+      <td>500000.0</td>
+    </tr>
+    <tr>
+      <th>3252</th>
+      <td>The Wailing</td>
+      <td>2016.0</td>
+      <td>Not Rated</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4659</th>
+      <td>Alleluia! The Devil's Carnival</td>
+      <td>2016.0</td>
+      <td>NaN</td>
+      <td>500000.0</td>
+    </tr>
+    <tr>
+      <th>4731</th>
+      <td>Bizarre</td>
+      <td>2015.0</td>
+      <td>Unrated</td>
+      <td>500000.0</td>
+    </tr>
+    <tr>
+      <th>812</th>
+      <td>The Ridiculous 6</td>
+      <td>2015.0</td>
+      <td>TV-14</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4831</th>
+      <td>The Gallows</td>
+      <td>2015.0</td>
+      <td>R</td>
+      <td>100000.0</td>
+    </tr>
+    <tr>
+      <th>4825</th>
+      <td>Romantic Schemer</td>
+      <td>2015.0</td>
+      <td>PG-13</td>
+      <td>125000.0</td>
+    </tr>
+    <tr>
+      <th>3796</th>
+      <td>R.L. Stine's Monsterville: The Cabinet of Souls</td>
+      <td>2015.0</td>
+      <td>PG</td>
+      <td>4400000.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+movie = pd.read_csv('data/movie.csv')
+movie2 = movie[['movie_title', 'imdb_score', 'budget']]
+movie_smallest_largest = movie2.nlargest(100, 'imdb_score').nsmallest(5, 'budget')
+movie_smallest_largest
+```
+
+
+##Hasil dari source code diatas
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>movie_title</th>
+      <th>imdb_score</th>
+      <th>budget</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4804</th>
+      <td>Butterfly Girl</td>
+      <td>8.7</td>
+      <td>180000.0</td>
+    </tr>
+    <tr>
+      <th>4801</th>
+      <td>Children of Heaven</td>
+      <td>8.5</td>
+      <td>180000.0</td>
+    </tr>
+    <tr>
+      <th>4706</th>
+      <td>12 Angry Men</td>
+      <td>8.9</td>
+      <td>350000.0</td>
+    </tr>
+    <tr>
+      <th>4550</th>
+      <td>A Separation</td>
+      <td>8.4</td>
+      <td>500000.0</td>
+    </tr>
+    <tr>
+      <th>4636</th>
+      <td>The Other Dream Team</td>
+      <td>8.4</td>
+      <td>500000.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+movie = pd.read_csv('data/movie.csv')
+movie2 = movie[['movie_title', 'imdb_score', 'budget']]
+movie2.sort_values('imdb_score', ascending=False).head(100).head()
+```
+
+## Hasil dari source code diatas
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>movie_title</th>
+      <th>imdb_score</th>
+      <th>budget</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2725</th>
+      <td>Towering Inferno</td>
+      <td>9.5</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1920</th>
+      <td>The Shawshank Redemption</td>
+      <td>9.3</td>
+      <td>25000000.0</td>
+    </tr>
+    <tr>
+      <th>3402</th>
+      <td>The Godfather</td>
+      <td>9.2</td>
+      <td>6000000.0</td>
+    </tr>
+    <tr>
+      <th>2779</th>
+      <td>Dekalog</td>
+      <td>9.1</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4312</th>
+      <td>Kickboxer: Vengeance</td>
+      <td>9.1</td>
+      <td>17000000.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+movie = pd.read_csv('data/movie.csv')
+movie2 = movie[['movie_title', 'imdb_score', 'budget']]
+movie2.sort_values('imdb_score', ascending=False).head(100).sort_values('budget').head()
+```
+
+##Hasil dari source code diatas
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>movie_title</th>
+      <th>imdb_score</th>
+      <th>budget</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4815</th>
+      <td>A Charlie Brown Christmas</td>
+      <td>8.4</td>
+      <td>150000.0</td>
+    </tr>
+    <tr>
+      <th>4801</th>
+      <td>Children of Heaven</td>
+      <td>8.5</td>
+      <td>180000.0</td>
+    </tr>
+    <tr>
+      <th>4804</th>
+      <td>Butterfly Girl</td>
+      <td>8.7</td>
+      <td>180000.0</td>
+    </tr>
+    <tr>
+      <th>4706</th>
+      <td>12 Angry Men</td>
+      <td>8.9</td>
+      <td>350000.0</td>
+    </tr>
+    <tr>
+      <th>4636</th>
+      <td>The Other Dream Team</td>
+      <td>8.4</td>
+      <td>500000.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+movie = pd.read_csv('data/movie.csv')
+movie2 = movie[['movie_title', 'imdb_score', 'budget']]
+movie2.nlargest(100, 'imdb_score').tail()
+```
+
+##Hasil dari source code diatas
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>movie_title</th>
+      <th>imdb_score</th>
+      <th>budget</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4023</th>
+      <td>Oldboy</td>
+      <td>8.4</td>
+      <td>3000000.0</td>
+    </tr>
+    <tr>
+      <th>4163</th>
+      <td>To Kill a Mockingbird</td>
+      <td>8.4</td>
+      <td>2000000.0</td>
+    </tr>
+    <tr>
+      <th>4395</th>
+      <td>Reservoir Dogs</td>
+      <td>8.4</td>
+      <td>1200000.0</td>
+    </tr>
+    <tr>
+      <th>4550</th>
+      <td>A Separation</td>
+      <td>8.4</td>
+      <td>500000.0</td>
+    </tr>
+    <tr>
+      <th>4636</th>
+      <td>The Other Dream Team</td>
+      <td>8.4</td>
+      <td>500000.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas as pd
+import numpy as np
+from IPython.display import display
+```
+
+
+```python
+movie = pd.read_csv('data/movie.csv')
+movie2 = movie[['movie_title', 'imdb_score', 'budget']]
+movie2.sort_values('imdb_score', ascending=False).head(100).tail()
+```
+
+## Hasil dari source code diatas
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>movie_title</th>
+      <th>imdb_score</th>
+      <th>budget</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3799</th>
+      <td>Anne of Green Gables</td>
+      <td>8.4</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3777</th>
+      <td>Requiem for a Dream</td>
+      <td>8.4</td>
+      <td>4500000.0</td>
+    </tr>
+    <tr>
+      <th>3935</th>
+      <td>Batman: The Dark Knight Returns, Part 2</td>
+      <td>8.4</td>
+      <td>3500000.0</td>
+    </tr>
+    <tr>
+      <th>4636</th>
+      <td>The Other Dream Team</td>
+      <td>8.4</td>
+      <td>500000.0</td>
+    </tr>
+    <tr>
+      <th>2455</th>
+      <td>Aliens</td>
+      <td>8.4</td>
+      <td>18500000.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas_datareader as pdr
+```
+
+
+```python
+tsla = pdr.DataReader('tsla', data_source='yahoo',start='2017-1-1')
+tsla.head(8)
+```
+
+## Hasil dari source code diatas
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Open</th>
+      <th>Close</th>
+      <th>Volume</th>
+      <th>Adj Close</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017-01-03</th>
+      <td>220.330002</td>
+      <td>210.960007</td>
+      <td>214.860001</td>
+      <td>216.990005</td>
+      <td>5923300</td>
+      <td>216.990005</td>
+    </tr>
+    <tr>
+      <th>2017-01-04</th>
+      <td>228.000000</td>
+      <td>214.309998</td>
+      <td>214.750000</td>
+      <td>226.990005</td>
+      <td>11213500</td>
+      <td>226.990005</td>
+    </tr>
+    <tr>
+      <th>2017-01-05</th>
+      <td>227.479996</td>
+      <td>221.949997</td>
+      <td>226.419998</td>
+      <td>226.750000</td>
+      <td>5911700</td>
+      <td>226.750000</td>
+    </tr>
+    <tr>
+      <th>2017-01-06</th>
+      <td>230.309998</td>
+      <td>225.449997</td>
+      <td>226.929993</td>
+      <td>229.009995</td>
+      <td>5527900</td>
+      <td>229.009995</td>
+    </tr>
+    <tr>
+      <th>2017-01-09</th>
+      <td>231.919998</td>
+      <td>228.000000</td>
+      <td>228.970001</td>
+      <td>231.279999</td>
+      <td>3957000</td>
+      <td>231.279999</td>
+    </tr>
+    <tr>
+      <th>2017-01-10</th>
+      <td>232.000000</td>
+      <td>226.889999</td>
+      <td>232.000000</td>
+      <td>229.869995</td>
+      <td>3660000</td>
+      <td>229.869995</td>
+    </tr>
+    <tr>
+      <th>2017-01-11</th>
+      <td>229.979996</td>
+      <td>226.679993</td>
+      <td>229.070007</td>
+      <td>229.729996</td>
+      <td>3650800</td>
+      <td>229.729996</td>
+    </tr>
+    <tr>
+      <th>2017-01-12</th>
+      <td>230.699997</td>
+      <td>225.580002</td>
+      <td>229.059998</td>
+      <td>229.589996</td>
+      <td>3790200</td>
+      <td>229.589996</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas_datareader as pdr
+```
+
+
+```python
+tsla = pdr.DataReader('tsla', data_source='yahoo',start='2017-1-1')
+tsla_close = tsla['Close']
+tsla_cummax = tsla_close.cummax()
+tsla_cummax.head(8)
+```
+
+## Hasil dari source code diatas
+
+
+    Date
+    2017-01-03    216.990005
+    2017-01-04    226.990005
+    2017-01-05    226.990005
+    2017-01-06    229.009995
+    2017-01-09    231.279999
+    2017-01-10    231.279999
+    2017-01-11    231.279999
+    2017-01-12    231.279999
+    Name: Close, dtype: float64
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas_datareader as pdr
+```
+
+
+```python
+tsla = pdr.DataReader('tsla', data_source='yahoo',start='2017-1-1')
+tsla_close = tsla['Close']
+tsla_cummax = tsla_close.cummax()
+tsla_trailing_stop = tsla_cummax * .9
+tsla_trailing_stop.head(8)
+```
+
+## Hasil dari source code diatas
+
+
+    Date
+    2017-01-03    195.291005
+    2017-01-04    204.291005
+    2017-01-05    204.291005
+    2017-01-06    206.108995
+    2017-01-09    208.151999
+    2017-01-10    208.151999
+    2017-01-11    208.151999
+    2017-01-12    208.151999
+    Name: Close, dtype: float64
+
+
+
+
+```python
+
+```
+
+
+
+```python
+import pandas_datareader as pdr
+```
+
+
+```python
+def set_trailing_loss(symbol, purchase_date, perc):
+    close = pdr.DataReader(symbol, 'yahoo', start=purchase_date)['Close']
+    return close.cummax() * perc
+msft_trailing_stop = set_trailing_loss('msft', '2017-6-1', .85)
+msft_trailing_stop.head()
+```
+
+
+## Hasil dari source code diatas
+
+    Date
+    2017-05-31    59.363997
+    2017-06-01    59.584999
+    2017-06-02    60.996002
+    2017-06-05    61.437999
+    2017-06-06    61.641997
+    Name: Close, dtype: float64
+
+
+
+
+```python
+
+```
+
+
