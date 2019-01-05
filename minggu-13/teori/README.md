@@ -20346,3 +20346,3577 @@ crime_quarterly.plot(**plot_kwargs)
 ```python
 
 ```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+crime_sort.resample('Q').sum().head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>GEO_LON</th>
+      <th>GEO_LAT</th>
+      <th>IS_CRIME</th>
+      <th>IS_TRAFFIC</th>
+    </tr>
+    <tr>
+      <th>REPORTED_DATE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2012-03-31</th>
+      <td>-1.313006e+06</td>
+      <td>496960.237747</td>
+      <td>7882</td>
+      <td>4726</td>
+    </tr>
+    <tr>
+      <th>2012-06-30</th>
+      <td>-1.547274e+06</td>
+      <td>585656.789182</td>
+      <td>9641</td>
+      <td>5255</td>
+    </tr>
+    <tr>
+      <th>2012-09-30</th>
+      <td>-1.615835e+06</td>
+      <td>611604.800384</td>
+      <td>10566</td>
+      <td>5003</td>
+    </tr>
+    <tr>
+      <th>2012-12-31</th>
+      <td>-1.458177e+06</td>
+      <td>551923.040048</td>
+      <td>9197</td>
+      <td>4802</td>
+    </tr>
+    <tr>
+      <th>2013-03-31</th>
+      <td>-1.368931e+06</td>
+      <td>518159.721947</td>
+      <td>8730</td>
+      <td>4442</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+crime_sort.resample('QS-MAR')['IS_CRIME', 'IS_TRAFFIC'].sum().head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>IS_CRIME</th>
+      <th>IS_TRAFFIC</th>
+    </tr>
+    <tr>
+      <th>REPORTED_DATE</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2011-12-01</th>
+      <td>5013</td>
+      <td>3198</td>
+    </tr>
+    <tr>
+      <th>2012-03-01</th>
+      <td>9260</td>
+      <td>4954</td>
+    </tr>
+    <tr>
+      <th>2012-06-01</th>
+      <td>10524</td>
+      <td>5190</td>
+    </tr>
+    <tr>
+      <th>2012-09-01</th>
+      <td>9450</td>
+      <td>4777</td>
+    </tr>
+    <tr>
+      <th>2012-12-01</th>
+      <td>9003</td>
+      <td>4652</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+crime_begin = crime_quarterly.iloc[0]
+crime_begin
+```
+
+
+
+
+    IS_CRIME      7882
+    IS_TRAFFIC    4726
+    Name: 2012-03-31 00:00:00, dtype: int64
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+crime_begin = crime_quarterly.iloc[0]
+crime_quarterly.div(crime_begin) \
+               .sub(1) \
+               .round(2) \
+               .plot(**plot_kwargs)
+```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x7f7e1458b2e8>
+
+
+
+
+![png](output_1_3.png)
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime = pd.read_hdf('data/crime.h5', 'crime')
+crime.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>OFFENSE_TYPE_ID</th>
+      <th>OFFENSE_CATEGORY_ID</th>
+      <th>REPORTED_DATE</th>
+      <th>GEO_LON</th>
+      <th>GEO_LAT</th>
+      <th>NEIGHBORHOOD_ID</th>
+      <th>IS_CRIME</th>
+      <th>IS_TRAFFIC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>traffic-accident-dui-duid</td>
+      <td>traffic-accident</td>
+      <td>2014-06-29 02:01:00</td>
+      <td>-105.000149</td>
+      <td>39.745753</td>
+      <td>cbd</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>vehicular-eluding-no-chase</td>
+      <td>all-other-crimes</td>
+      <td>2014-06-29 01:54:00</td>
+      <td>-104.884660</td>
+      <td>39.738702</td>
+      <td>east-colfax</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>disturbing-the-peace</td>
+      <td>public-disorder</td>
+      <td>2014-06-29 02:00:00</td>
+      <td>-105.020719</td>
+      <td>39.706674</td>
+      <td>athmar-park</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>curfew</td>
+      <td>public-disorder</td>
+      <td>2014-06-29 02:18:00</td>
+      <td>-105.001552</td>
+      <td>39.769505</td>
+      <td>sunnyside</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>aggravated-assault</td>
+      <td>aggravated-assault</td>
+      <td>2014-06-29 04:17:00</td>
+      <td>-105.018557</td>
+      <td>39.679229</td>
+      <td>college-view-south-platte</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime = pd.read_hdf('data/crime.h5', 'crime')
+wd_counts = crime['REPORTED_DATE'].dt.weekday_name.value_counts()
+wd_counts
+```
+
+
+
+
+    Monday       70024
+    Friday       69621
+    Wednesday    69538
+                 ...  
+    Tuesday      68394
+    Saturday     58834
+    Sunday       55213
+    Name: REPORTED_DATE, Length: 7, dtype: int64
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime = pd.read_hdf('data/crime.h5', 'crime')
+wd_counts = crime['REPORTED_DATE'].dt.weekday_name.value_counts()
+days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 
+        'Friday', 'Saturday', 'Sunday']
+title = 'Denver Crimes and Traffic Accidents per Weekday'
+wd_counts.reindex(days).plot(kind='barh', title=title)
+```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x7f7e0822c748>
+
+
+
+
+![png](output_1_4.png)
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime = pd.read_hdf('data/crime.h5', 'crime')
+wd_counts = crime['REPORTED_DATE'].dt.weekday_name.value_counts()
+days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 
+        'Friday', 'Saturday', 'Sunday']
+title = 'Denver Crimes and Traffic Accidents per Year' 
+crime['REPORTED_DATE'].dt.year.value_counts() \
+                              .sort_index() \
+                              .plot(kind='barh', title=title)
+```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x7f7e144472e8>
+
+
+
+
+![png](output_1_5.png)
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime = pd.read_hdf('data/crime.h5', 'crime')
+wd_counts = crime['REPORTED_DATE'].dt.weekday_name.value_counts()
+weekday = crime['REPORTED_DATE'].dt.weekday_name
+year = crime['REPORTED_DATE'].dt.year
+
+crime_wd_y = crime.groupby([year, weekday]).size()
+crime_wd_y.head(10)
+```
+
+
+
+
+    REPORTED_DATE  REPORTED_DATE
+    2012           Friday            8549
+                   Monday            8786
+                   Saturday          7442
+                                    ...  
+    2013           Friday           10380
+                   Monday           10627
+                   Saturday          8875
+    Length: 10, dtype: int64
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime = pd.read_hdf('data/crime.h5', 'crime')
+wd_counts = crime['REPORTED_DATE'].dt.weekday_name.value_counts()
+weekday = crime['REPORTED_DATE'].dt.weekday_name
+year = crime['REPORTED_DATE'].dt.year
+
+crime_wd_y = crime.groupby([year, weekday]).size()
+crime_table = crime_wd_y.rename_axis(['Year', 'Weekday']).unstack('Weekday')
+crime_table
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Weekday</th>
+      <th>Friday</th>
+      <th>Monday</th>
+      <th>Saturday</th>
+      <th>Sunday</th>
+      <th>Thursday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+    </tr>
+    <tr>
+      <th>Year</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2012</th>
+      <td>8549</td>
+      <td>8786</td>
+      <td>7442</td>
+      <td>7189</td>
+      <td>8440</td>
+      <td>8191</td>
+      <td>8440</td>
+    </tr>
+    <tr>
+      <th>2013</th>
+      <td>10380</td>
+      <td>10627</td>
+      <td>8875</td>
+      <td>8444</td>
+      <td>10431</td>
+      <td>10416</td>
+      <td>10354</td>
+    </tr>
+    <tr>
+      <th>2014</th>
+      <td>12683</td>
+      <td>12813</td>
+      <td>10950</td>
+      <td>10278</td>
+      <td>12309</td>
+      <td>12440</td>
+      <td>12948</td>
+    </tr>
+    <tr>
+      <th>2015</th>
+      <td>13273</td>
+      <td>13452</td>
+      <td>11586</td>
+      <td>10624</td>
+      <td>13512</td>
+      <td>13381</td>
+      <td>13320</td>
+    </tr>
+    <tr>
+      <th>2016</th>
+      <td>14059</td>
+      <td>13708</td>
+      <td>11467</td>
+      <td>10554</td>
+      <td>14050</td>
+      <td>13338</td>
+      <td>13900</td>
+    </tr>
+    <tr>
+      <th>2017</th>
+      <td>10677</td>
+      <td>10638</td>
+      <td>8514</td>
+      <td>8124</td>
+      <td>10545</td>
+      <td>10628</td>
+      <td>10576</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime = pd.read_hdf('data/crime.h5', 'crime')
+criteria = crime['REPORTED_DATE'].dt.year == 2017
+crime.loc[criteria, 'REPORTED_DATE'].dt.dayofyear.max()
+```
+
+
+
+
+    272
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime = pd.read_hdf('data/crime.h5', 'crime')
+criteria = crime['REPORTED_DATE'].dt.year == 2017
+round(272 / 365, 3)
+```
+
+
+
+
+    0.745
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime = pd.read_hdf('data/crime.h5', 'crime')
+crime_pct = crime['REPORTED_DATE'].dt.dayofyear.le(272) \
+                                  .groupby(year) \
+                                  .mean() \
+                                  .round(3)
+crime_pct
+```
+
+
+
+
+    REPORTED_DATE
+    2012    0.748
+    2013    0.725
+    2014    0.751
+    2015    0.748
+    2016    0.752
+    2017    1.000
+    Name: REPORTED_DATE, dtype: float64
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime = pd.read_hdf('data/crime.h5', 'crime')
+crime_table.loc[2017] = crime_table.loc[2017].div(.748).astype('int')
+crime_table = crime_table.reindex(columns=days)
+crime_table
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Weekday</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
+      <th>Sunday</th>
+    </tr>
+    <tr>
+      <th>Year</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2012</th>
+      <td>8786</td>
+      <td>8191</td>
+      <td>8440</td>
+      <td>8440</td>
+      <td>8549</td>
+      <td>7442</td>
+      <td>7189</td>
+    </tr>
+    <tr>
+      <th>2013</th>
+      <td>10627</td>
+      <td>10416</td>
+      <td>10354</td>
+      <td>10431</td>
+      <td>10380</td>
+      <td>8875</td>
+      <td>8444</td>
+    </tr>
+    <tr>
+      <th>2014</th>
+      <td>12813</td>
+      <td>12440</td>
+      <td>12948</td>
+      <td>12309</td>
+      <td>12683</td>
+      <td>10950</td>
+      <td>10278</td>
+    </tr>
+    <tr>
+      <th>2015</th>
+      <td>13452</td>
+      <td>13381</td>
+      <td>13320</td>
+      <td>13512</td>
+      <td>13273</td>
+      <td>11586</td>
+      <td>10624</td>
+    </tr>
+    <tr>
+      <th>2016</th>
+      <td>13708</td>
+      <td>13338</td>
+      <td>13900</td>
+      <td>14050</td>
+      <td>14059</td>
+      <td>11467</td>
+      <td>10554</td>
+    </tr>
+    <tr>
+      <th>2017</th>
+      <td>14221</td>
+      <td>14208</td>
+      <td>14139</td>
+      <td>14097</td>
+      <td>14274</td>
+      <td>11382</td>
+      <td>10860</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime = pd.read_hdf('data/crime.h5', 'crime')
+crime_table.loc[2017] = crime_table.loc[2017].div(.748).astype('int')
+crime_table = crime_table.reindex(columns=days)
+import seaborn as sns
+sns.heatmap(crime_table, cmap='Greys')
+```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x7f7df5aa9940>
+
+
+
+
+![png](output_1_6.png)
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+denver_pop = pd.read_csv('data/denver_pop.csv', index_col='Year')
+denver_pop
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Population</th>
+    </tr>
+    <tr>
+      <th>Year</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2017</th>
+      <td>705000</td>
+    </tr>
+    <tr>
+      <th>2016</th>
+      <td>693000</td>
+    </tr>
+    <tr>
+      <th>2015</th>
+      <td>680000</td>
+    </tr>
+    <tr>
+      <th>2014</th>
+      <td>662000</td>
+    </tr>
+    <tr>
+      <th>2013</th>
+      <td>647000</td>
+    </tr>
+    <tr>
+      <th>2012</th>
+      <td>634000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+denver_pop = pd.read_csv('data/denver_pop.csv', index_col='Year')
+den_100k = denver_pop.div(100000).squeeze()
+crime_table2 = crime_table.div(den_100k, axis='index').astype('int')
+crime_table2
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Weekday</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
+      <th>Sunday</th>
+    </tr>
+    <tr>
+      <th>Year</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2012</th>
+      <td>1385</td>
+      <td>1291</td>
+      <td>1331</td>
+      <td>1331</td>
+      <td>1348</td>
+      <td>1173</td>
+      <td>1133</td>
+    </tr>
+    <tr>
+      <th>2013</th>
+      <td>1642</td>
+      <td>1609</td>
+      <td>1600</td>
+      <td>1612</td>
+      <td>1604</td>
+      <td>1371</td>
+      <td>1305</td>
+    </tr>
+    <tr>
+      <th>2014</th>
+      <td>1935</td>
+      <td>1879</td>
+      <td>1955</td>
+      <td>1859</td>
+      <td>1915</td>
+      <td>1654</td>
+      <td>1552</td>
+    </tr>
+    <tr>
+      <th>2015</th>
+      <td>1978</td>
+      <td>1967</td>
+      <td>1958</td>
+      <td>1987</td>
+      <td>1951</td>
+      <td>1703</td>
+      <td>1562</td>
+    </tr>
+    <tr>
+      <th>2016</th>
+      <td>1978</td>
+      <td>1924</td>
+      <td>2005</td>
+      <td>2027</td>
+      <td>2028</td>
+      <td>1654</td>
+      <td>1522</td>
+    </tr>
+    <tr>
+      <th>2017</th>
+      <td>3605</td>
+      <td>3601</td>
+      <td>3584</td>
+      <td>3573</td>
+      <td>3618</td>
+      <td>2885</td>
+      <td>2753</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+denver_pop = pd.read_csv('data/denver_pop.csv', index_col='Year')
+den_100k = denver_pop.div(100000).squeeze()
+crime_table2 = crime_table.div(den_100k, axis='index').astype('int')
+sns.heatmap(crime_table2, cmap='Greys')
+```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x7f7df52cf748>
+
+
+
+
+![png](output_1_7.png)
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+wd_counts.loc[days]
+```
+
+
+
+
+    Monday       70024
+    Tuesday      68394
+    Wednesday    69538
+                 ...  
+    Friday       69621
+    Saturday     58834
+    Sunday       55213
+    Name: REPORTED_DATE, Length: 7, dtype: int64
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_table / den_100k
+```
+
+    /home/satria/miniconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py:3772: RuntimeWarning: '<' not supported between instances of 'str' and 'int', sort order is undefined for incomparable objects
+      return this.join(other, how=how, return_indexers=return_indexers)
+
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
+      <th>Sunday</th>
+      <th>2017</th>
+      <th>2016</th>
+      <th>2015</th>
+      <th>2014</th>
+      <th>2013</th>
+      <th>2012</th>
+    </tr>
+    <tr>
+      <th>Year</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2012</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2013</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2014</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2015</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2016</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2017</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+ADJ_2017 = .748
+
+def count_crime(df, offense_cat): 
+    df = df[df['OFFENSE_CATEGORY_ID'] == offense_cat]
+    weekday = df['REPORTED_DATE'].dt.weekday_name
+    year = df['REPORTED_DATE'].dt.year
+    
+    ct = df.groupby([year, weekday]).size().unstack()
+    ct.loc[2017] = ct.loc[2017].div(ADJ_2017).astype('int')
+    
+    pop = pd.read_csv('data/denver_pop.csv', index_col='Year')
+    pop = pop.squeeze().div(100000)
+    
+    ct = ct.div(pop, axis=0).astype('int')
+    ct = ct.reindex(columns=days)
+    sns.heatmap(ct, cmap='Greys')
+    return ct
+count_crime(crime, 'auto-theft')
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>REPORTED_DATE</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
+      <th>Sunday</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2012</th>
+      <td>95</td>
+      <td>72</td>
+      <td>72</td>
+      <td>76</td>
+      <td>71</td>
+      <td>78</td>
+      <td>76</td>
+    </tr>
+    <tr>
+      <th>2013</th>
+      <td>85</td>
+      <td>74</td>
+      <td>74</td>
+      <td>69</td>
+      <td>65</td>
+      <td>68</td>
+      <td>67</td>
+    </tr>
+    <tr>
+      <th>2014</th>
+      <td>94</td>
+      <td>76</td>
+      <td>72</td>
+      <td>70</td>
+      <td>76</td>
+      <td>67</td>
+      <td>67</td>
+    </tr>
+    <tr>
+      <th>2015</th>
+      <td>108</td>
+      <td>102</td>
+      <td>89</td>
+      <td>101</td>
+      <td>92</td>
+      <td>85</td>
+      <td>78</td>
+    </tr>
+    <tr>
+      <th>2016</th>
+      <td>119</td>
+      <td>102</td>
+      <td>100</td>
+      <td>99</td>
+      <td>97</td>
+      <td>86</td>
+      <td>85</td>
+    </tr>
+    <tr>
+      <th>2017</th>
+      <td>114</td>
+      <td>118</td>
+      <td>111</td>
+      <td>106</td>
+      <td>111</td>
+      <td>91</td>
+      <td>102</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+![png](output_1_8.png)
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+common_attrs = set(dir(crime_sort.index)) & set(dir(pd.Timestamp))
+print([attr for attr in common_attrs if attr[0] != '_'])
+```
+
+    ['strftime', 'is_quarter_end', 'min', 'freqstr', 'is_month_start', 'daysinmonth', 'day', 'date', 'tzinfo', 'day_name', 'dayofyear', 'freq', 'max', 'weekday_name', 'round', 'quarter', 'to_period', 'dayofweek', 'second', 'month', 'year', 'weekday', 'is_year_start', 'tz_convert', 'days_in_month', 'tz', 'hour', 'tz_localize', 'is_quarter_start', 'floor', 'month_name', 'is_year_end', 'resolution', 'week', 'time', 'microsecond', 'to_pydatetime', 'ceil', 'is_month_end', 'normalize', 'minute', 'is_leap_year', 'weekofyear', 'nanosecond', 'to_julian_date']
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+common_attrs = set(dir(crime_sort.index)) & set(dir(pd.Timestamp))
+crime_sort.index.weekday_name.value_counts()
+```
+
+
+
+
+    Monday       70024
+    Friday       69621
+    Wednesday    69538
+                 ...  
+    Tuesday      68394
+    Saturday     58834
+    Sunday       55213
+    Name: REPORTED_DATE, Length: 7, dtype: int64
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+common_attrs = set(dir(crime_sort.index)) & set(dir(pd.Timestamp))
+crime_sort.groupby(lambda x: x.weekday_name)['IS_CRIME', 'IS_TRAFFIC'].sum()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>IS_CRIME</th>
+      <th>IS_TRAFFIC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Friday</th>
+      <td>48833</td>
+      <td>20814</td>
+    </tr>
+    <tr>
+      <th>Monday</th>
+      <td>52158</td>
+      <td>17895</td>
+    </tr>
+    <tr>
+      <th>Saturday</th>
+      <td>43363</td>
+      <td>15516</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>Thursday</th>
+      <td>49470</td>
+      <td>19845</td>
+    </tr>
+    <tr>
+      <th>Tuesday</th>
+      <td>49658</td>
+      <td>18755</td>
+    </tr>
+    <tr>
+      <th>Wednesday</th>
+      <td>50054</td>
+      <td>19508</td>
+    </tr>
+  </tbody>
+</table>
+<p>7 rows × 2 columns</p>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+funcs = [lambda x: x.round('2h').hour, lambda x: x.year]
+cr_group = crime_sort.groupby(funcs)['IS_CRIME', 'IS_TRAFFIC'].sum()
+cr_final = cr_group.unstack()
+cr_final.style.highlight_max(color='lightgrey')
+```
+
+
+
+
+<style  type="text/css" >
+    #T_cb6c93ca_1087_11e9_9312_c7de921872d7row6_col0 {
+            background-color:  lightgrey;
+        }    #T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col1 {
+            background-color:  lightgrey;
+        }    #T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col2 {
+            background-color:  lightgrey;
+        }    #T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col3 {
+            background-color:  lightgrey;
+        }    #T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col4 {
+            background-color:  lightgrey;
+        }    #T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col5 {
+            background-color:  lightgrey;
+        }    #T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col11 {
+            background-color:  lightgrey;
+        }    #T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col6 {
+            background-color:  lightgrey;
+        }    #T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col7 {
+            background-color:  lightgrey;
+        }    #T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col8 {
+            background-color:  lightgrey;
+        }    #T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col9 {
+            background-color:  lightgrey;
+        }    #T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col10 {
+            background-color:  lightgrey;
+        }</style>  
+<table id="T_cb6c93ca_1087_11e9_9312_c7de921872d7" > 
+<thead>    <tr> 
+        <th class="blank level0" ></th> 
+        <th class="col_heading level0 col0" colspan=6>IS_CRIME</th> 
+        <th class="col_heading level0 col6" colspan=6>IS_TRAFFIC</th> 
+    </tr>    <tr> 
+        <th class="blank level1" ></th> 
+        <th class="col_heading level1 col0" >2012</th> 
+        <th class="col_heading level1 col1" >2013</th> 
+        <th class="col_heading level1 col2" >2014</th> 
+        <th class="col_heading level1 col3" >2015</th> 
+        <th class="col_heading level1 col4" >2016</th> 
+        <th class="col_heading level1 col5" >2017</th> 
+        <th class="col_heading level1 col6" >2012</th> 
+        <th class="col_heading level1 col7" >2013</th> 
+        <th class="col_heading level1 col8" >2014</th> 
+        <th class="col_heading level1 col9" >2015</th> 
+        <th class="col_heading level1 col10" >2016</th> 
+        <th class="col_heading level1 col11" >2017</th> 
+    </tr></thead> 
+<tbody>    <tr> 
+        <th id="T_cb6c93ca_1087_11e9_9312_c7de921872d7level0_row0" class="row_heading level0 row0" >0</th> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row0_col0" class="data row0 col0" >2422</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row0_col1" class="data row0 col1" >4040</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row0_col2" class="data row0 col2" >5649</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row0_col3" class="data row0 col3" >5649</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row0_col4" class="data row0 col4" >5377</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row0_col5" class="data row0 col5" >3811</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row0_col6" class="data row0 col6" >919</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row0_col7" class="data row0 col7" >792</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row0_col8" class="data row0 col8" >978</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row0_col9" class="data row0 col9" >1136</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row0_col10" class="data row0 col10" >980</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row0_col11" class="data row0 col11" >782</td> 
+    </tr>    <tr> 
+        <th id="T_cb6c93ca_1087_11e9_9312_c7de921872d7level0_row1" class="row_heading level0 row1" >2</th> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row1_col0" class="data row1 col0" >1888</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row1_col1" class="data row1 col1" >3214</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row1_col2" class="data row1 col2" >4245</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row1_col3" class="data row1 col3" >4050</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row1_col4" class="data row1 col4" >4091</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row1_col5" class="data row1 col5" >3041</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row1_col6" class="data row1 col6" >718</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row1_col7" class="data row1 col7" >652</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row1_col8" class="data row1 col8" >779</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row1_col9" class="data row1 col9" >773</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row1_col10" class="data row1 col10" >718</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row1_col11" class="data row1 col11" >537</td> 
+    </tr>    <tr> 
+        <th id="T_cb6c93ca_1087_11e9_9312_c7de921872d7level0_row2" class="row_heading level0 row2" >4</th> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row2_col0" class="data row2 col0" >1472</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row2_col1" class="data row2 col1" >2181</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row2_col2" class="data row2 col2" >2956</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row2_col3" class="data row2 col3" >2959</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row2_col4" class="data row2 col4" >3044</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row2_col5" class="data row2 col5" >2255</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row2_col6" class="data row2 col6" >399</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row2_col7" class="data row2 col7" >378</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row2_col8" class="data row2 col8" >424</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row2_col9" class="data row2 col9" >471</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row2_col10" class="data row2 col10" >464</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row2_col11" class="data row2 col11" >313</td> 
+    </tr>    <tr> 
+        <th id="T_cb6c93ca_1087_11e9_9312_c7de921872d7level0_row3" class="row_heading level0 row3" >6</th> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row3_col0" class="data row3 col0" >1067</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row3_col1" class="data row3 col1" >1365</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row3_col2" class="data row3 col2" >1750</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row3_col3" class="data row3 col3" >2167</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row3_col4" class="data row3 col4" >2108</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row3_col5" class="data row3 col5" >1567</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row3_col6" class="data row3 col6" >411</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row3_col7" class="data row3 col7" >399</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row3_col8" class="data row3 col8" >479</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row3_col9" class="data row3 col9" >494</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row3_col10" class="data row3 col10" >593</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row3_col11" class="data row3 col11" >462</td> 
+    </tr>    <tr> 
+        <th id="T_cb6c93ca_1087_11e9_9312_c7de921872d7level0_row4" class="row_heading level0 row4" >8</th> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row4_col0" class="data row4 col0" >2998</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row4_col1" class="data row4 col1" >3445</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row4_col2" class="data row4 col2" >3727</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row4_col3" class="data row4 col3" >4161</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row4_col4" class="data row4 col4" >4488</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row4_col5" class="data row4 col5" >3251</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row4_col6" class="data row4 col6" >1957</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row4_col7" class="data row4 col7" >1955</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row4_col8" class="data row4 col8" >2210</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row4_col9" class="data row4 col9" >2331</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row4_col10" class="data row4 col10" >2372</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row4_col11" class="data row4 col11" >1828</td> 
+    </tr>    <tr> 
+        <th id="T_cb6c93ca_1087_11e9_9312_c7de921872d7level0_row5" class="row_heading level0 row5" >10</th> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row5_col0" class="data row5 col0" >4305</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row5_col1" class="data row5 col1" >5035</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row5_col2" class="data row5 col2" >5658</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row5_col3" class="data row5 col3" >6205</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row5_col4" class="data row5 col4" >6218</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row5_col5" class="data row5 col5" >4993</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row5_col6" class="data row5 col6" >1979</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row5_col7" class="data row5 col7" >1901</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row5_col8" class="data row5 col8" >2139</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row5_col9" class="data row5 col9" >2320</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row5_col10" class="data row5 col10" >2303</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row5_col11" class="data row5 col11" >1873</td> 
+    </tr>    <tr> 
+        <th id="T_cb6c93ca_1087_11e9_9312_c7de921872d7level0_row6" class="row_heading level0 row6" >12</th> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row6_col0" class="data row6 col0" >4496</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row6_col1" class="data row6 col1" >5524</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row6_col2" class="data row6 col2" >6434</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row6_col3" class="data row6 col3" >6841</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row6_col4" class="data row6 col4" >7226</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row6_col5" class="data row6 col5" >5463</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row6_col6" class="data row6 col6" >2200</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row6_col7" class="data row6 col7" >2138</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row6_col8" class="data row6 col8" >2379</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row6_col9" class="data row6 col9" >2631</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row6_col10" class="data row6 col10" >2760</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row6_col11" class="data row6 col11" >1986</td> 
+    </tr>    <tr> 
+        <th id="T_cb6c93ca_1087_11e9_9312_c7de921872d7level0_row7" class="row_heading level0 row7" >14</th> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row7_col0" class="data row7 col0" >4266</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row7_col1" class="data row7 col1" >5698</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row7_col2" class="data row7 col2" >6708</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row7_col3" class="data row7 col3" >7218</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row7_col4" class="data row7 col4" >6896</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row7_col5" class="data row7 col5" >5396</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row7_col6" class="data row7 col6" >2241</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row7_col7" class="data row7 col7" >2245</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row7_col8" class="data row7 col8" >2630</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row7_col9" class="data row7 col9" >2840</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row7_col10" class="data row7 col10" >2763</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row7_col11" class="data row7 col11" >1990</td> 
+    </tr>    <tr> 
+        <th id="T_cb6c93ca_1087_11e9_9312_c7de921872d7level0_row8" class="row_heading level0 row8" >16</th> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col0" class="data row8 col0" >4113</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col1" class="data row8 col1" >5889</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col2" class="data row8 col2" >7351</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col3" class="data row8 col3" >7643</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col4" class="data row8 col4" >7926</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col5" class="data row8 col5" >6338</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col6" class="data row8 col6" >2714</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col7" class="data row8 col7" >2562</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col8" class="data row8 col8" >3002</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col9" class="data row8 col9" >3160</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col10" class="data row8 col10" >3527</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row8_col11" class="data row8 col11" >2784</td> 
+    </tr>    <tr> 
+        <th id="T_cb6c93ca_1087_11e9_9312_c7de921872d7level0_row9" class="row_heading level0 row9" >18</th> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col0" class="data row9 col0" >3660</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col1" class="data row9 col1" >5094</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col2" class="data row9 col2" >6586</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col3" class="data row9 col3" >7015</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col4" class="data row9 col4" >7407</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col5" class="data row9 col5" >6157</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col6" class="data row9 col6" >3118</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col7" class="data row9 col7" >2704</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col8" class="data row9 col8" >3217</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col9" class="data row9 col9" >3412</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col10" class="data row9 col10" >3608</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row9_col11" class="data row9 col11" >2718</td> 
+    </tr>    <tr> 
+        <th id="T_cb6c93ca_1087_11e9_9312_c7de921872d7level0_row10" class="row_heading level0 row10" >20</th> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row10_col0" class="data row10 col0" >3521</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row10_col1" class="data row10 col1" >4895</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row10_col2" class="data row10 col2" >6130</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row10_col3" class="data row10 col3" >6360</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row10_col4" class="data row10 col4" >6963</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row10_col5" class="data row10 col5" >5272</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row10_col6" class="data row10 col6" >1787</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row10_col7" class="data row10 col7" >1806</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row10_col8" class="data row10 col8" >1994</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row10_col9" class="data row10 col9" >2071</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row10_col10" class="data row10 col10" >2184</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row10_col11" class="data row10 col11" >1491</td> 
+    </tr>    <tr> 
+        <th id="T_cb6c93ca_1087_11e9_9312_c7de921872d7level0_row11" class="row_heading level0 row11" >22</th> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row11_col0" class="data row11 col0" >3078</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row11_col1" class="data row11 col1" >4318</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row11_col2" class="data row11 col2" >5496</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row11_col3" class="data row11 col3" >5626</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row11_col4" class="data row11 col4" >5637</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row11_col5" class="data row11 col5" >4358</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row11_col6" class="data row11 col6" >1343</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row11_col7" class="data row11 col7" >1330</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row11_col8" class="data row11 col8" >1532</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row11_col9" class="data row11 col9" >1671</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row11_col10" class="data row11 col10" >1472</td> 
+        <td id="T_cb6c93ca_1087_11e9_9312_c7de921872d7row11_col11" class="data row11 col11" >1072</td> 
+    </tr></tbody> 
+</table> 
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+funcs = [lambda x: x.round('2h').hour, lambda x: x.year]
+cr_group = crime_sort.groupby(funcs)['IS_CRIME', 'IS_TRAFFIC'].sum()
+cr_final = cr_group.unstack()
+cr_final.xs('IS_TRAFFIC', axis='columns', level=0).head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>2012</th>
+      <th>2013</th>
+      <th>2014</th>
+      <th>2015</th>
+      <th>2016</th>
+      <th>2017</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>919</td>
+      <td>792</td>
+      <td>978</td>
+      <td>1136</td>
+      <td>980</td>
+      <td>782</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>718</td>
+      <td>652</td>
+      <td>779</td>
+      <td>773</td>
+      <td>718</td>
+      <td>537</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>399</td>
+      <td>378</td>
+      <td>424</td>
+      <td>471</td>
+      <td>464</td>
+      <td>313</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>411</td>
+      <td>399</td>
+      <td>479</td>
+      <td>494</td>
+      <td>593</td>
+      <td>462</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1957</td>
+      <td>1955</td>
+      <td>2210</td>
+      <td>2331</td>
+      <td>2372</td>
+      <td>1828</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+funcs = [lambda x: x.round('2h').hour, lambda x: x.year]
+cr_group = crime_sort.groupby(funcs)['IS_CRIME', 'IS_TRAFFIC'].sum()
+cr_final = cr_group.unstack()
+cr_final.xs(2016, axis='columns', level=1).head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>2012</th>
+      <th>2013</th>
+      <th>2014</th>
+      <th>2015</th>
+      <th>2016</th>
+      <th>2017</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>919</td>
+      <td>792</td>
+      <td>978</td>
+      <td>1136</td>
+      <td>980</td>
+      <td>782</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>718</td>
+      <td>652</td>
+      <td>779</td>
+      <td>773</td>
+      <td>718</td>
+      <td>537</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>399</td>
+      <td>378</td>
+      <td>424</td>
+      <td>471</td>
+      <td>464</td>
+      <td>313</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>411</td>
+      <td>399</td>
+      <td>479</td>
+      <td>494</td>
+      <td>593</td>
+      <td>462</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1957</td>
+      <td>1955</td>
+      <td>2210</td>
+      <td>2331</td>
+      <td>2372</td>
+      <td>1828</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+employee = pd.read_csv('data/employee.csv', 
+                       parse_dates=['JOB_DATE', 'HIRE_DATE'], 
+                       index_col='HIRE_DATE')
+employee.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>UNIQUE_ID</th>
+      <th>POSITION_TITLE</th>
+      <th>DEPARTMENT</th>
+      <th>BASE_SALARY</th>
+      <th>RACE</th>
+      <th>EMPLOYMENT_TYPE</th>
+      <th>GENDER</th>
+      <th>EMPLOYMENT_STATUS</th>
+      <th>JOB_DATE</th>
+    </tr>
+    <tr>
+      <th>HIRE_DATE</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2006-06-12</th>
+      <td>0</td>
+      <td>ASSISTANT DIRECTOR (EX LVL)</td>
+      <td>Municipal Courts Department</td>
+      <td>121862.0</td>
+      <td>Hispanic/Latino</td>
+      <td>Full Time</td>
+      <td>Female</td>
+      <td>Active</td>
+      <td>2012-10-13</td>
+    </tr>
+    <tr>
+      <th>2000-07-19</th>
+      <td>1</td>
+      <td>LIBRARY ASSISTANT</td>
+      <td>Library</td>
+      <td>26125.0</td>
+      <td>Hispanic/Latino</td>
+      <td>Full Time</td>
+      <td>Female</td>
+      <td>Active</td>
+      <td>2010-09-18</td>
+    </tr>
+    <tr>
+      <th>2015-02-03</th>
+      <td>2</td>
+      <td>POLICE OFFICER</td>
+      <td>Houston Police Department-HPD</td>
+      <td>45279.0</td>
+      <td>White</td>
+      <td>Full Time</td>
+      <td>Male</td>
+      <td>Active</td>
+      <td>2015-02-03</td>
+    </tr>
+    <tr>
+      <th>1982-02-08</th>
+      <td>3</td>
+      <td>ENGINEER/OPERATOR</td>
+      <td>Houston Fire Department (HFD)</td>
+      <td>63166.0</td>
+      <td>White</td>
+      <td>Full Time</td>
+      <td>Male</td>
+      <td>Active</td>
+      <td>1991-05-25</td>
+    </tr>
+    <tr>
+      <th>1989-06-19</th>
+      <td>4</td>
+      <td>ELECTRICIAN</td>
+      <td>General Services Department</td>
+      <td>56347.0</td>
+      <td>White</td>
+      <td>Full Time</td>
+      <td>Male</td>
+      <td>Active</td>
+      <td>1994-10-22</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+employee = pd.read_csv('data/employee.csv', 
+                       parse_dates=['JOB_DATE', 'HIRE_DATE'], 
+                       index_col='HIRE_DATE')
+employee.groupby('GENDER')['BASE_SALARY'].mean().round(-2)
+```
+
+
+
+
+    GENDER
+    Female    52200.0
+    Male      57400.0
+    Name: BASE_SALARY, dtype: float64
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+employee = pd.read_csv('data/employee.csv', 
+                       parse_dates=['JOB_DATE', 'HIRE_DATE'], 
+                       index_col='HIRE_DATE')
+employee.resample('10AS')['BASE_SALARY'].mean().round(-2)
+```
+
+
+
+
+    HIRE_DATE
+    1958-01-01     81200.0
+    1968-01-01    106500.0
+    1978-01-01     69600.0
+                    ...   
+    1998-01-01     58200.0
+    2008-01-01     47200.0
+    2018-01-01         NaN
+    Name: BASE_SALARY, Length: 7, dtype: float64
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+employee = pd.read_csv('data/employee.csv', 
+                       parse_dates=['JOB_DATE', 'HIRE_DATE'], 
+                       index_col='HIRE_DATE')
+employee.resample('10AS')['BASE_SALARY'].mean().round(-2)
+```
+
+
+
+
+    HIRE_DATE
+    1958-01-01     81200.0
+    1968-01-01    106500.0
+    1978-01-01     69600.0
+                    ...   
+    1998-01-01     58200.0
+    2008-01-01     47200.0
+    2018-01-01         NaN
+    Name: BASE_SALARY, Length: 7, dtype: float64
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+employee = pd.read_csv('data/employee.csv', 
+                       parse_dates=['JOB_DATE', 'HIRE_DATE'], 
+                       index_col='HIRE_DATE')
+sal_avg = employee.groupby('GENDER').resample('10AS')['BASE_SALARY'].mean().round(-2)
+sal_avg.unstack('GENDER')
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>GENDER</th>
+      <th>Female</th>
+      <th>Male</th>
+    </tr>
+    <tr>
+      <th>HIRE_DATE</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1958-01-01</th>
+      <td>NaN</td>
+      <td>81200.0</td>
+    </tr>
+    <tr>
+      <th>1968-01-01</th>
+      <td>NaN</td>
+      <td>106500.0</td>
+    </tr>
+    <tr>
+      <th>1975-01-01</th>
+      <td>51600.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2015-01-01</th>
+      <td>38600.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2018-01-01</th>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2025-01-01</th>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>13 rows × 2 columns</p>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+employee = pd.read_csv('data/employee.csv', 
+                       parse_dates=['JOB_DATE', 'HIRE_DATE'], 
+                       index_col='HIRE_DATE')
+sal_avg = employee.groupby('GENDER').resample('10AS')['BASE_SALARY'].mean().round(-2)
+employee[employee['GENDER'] == 'Male'].index.min()
+```
+
+
+
+
+    Timestamp('1958-12-29 00:00:00')
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+employee = pd.read_csv('data/employee.csv', 
+                       parse_dates=['JOB_DATE', 'HIRE_DATE'], 
+                       index_col='HIRE_DATE')
+sal_avg = employee.groupby('GENDER').resample('10AS')['BASE_SALARY'].mean().round(-2)
+employee[employee['GENDER'] == 'Male'].index.min()
+```
+
+
+
+
+    Timestamp('1958-12-29 00:00:00')
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+employee = pd.read_csv('data/employee.csv', 
+                       parse_dates=['JOB_DATE', 'HIRE_DATE'], 
+                       index_col='HIRE_DATE')
+sal_avg2 = employee.groupby(['GENDER', pd.Grouper(freq='10AS')])['BASE_SALARY'].mean().round(-2)
+sal_avg2
+```
+
+
+
+
+    GENDER  HIRE_DATE 
+    Female  1968-01-01        NaN
+            1978-01-01    57100.0
+            1988-01-01    57100.0
+                           ...   
+    Male    1988-01-01    64600.0
+            1998-01-01    59700.0
+            2008-01-01    47200.0
+    Name: BASE_SALARY, Length: 11, dtype: float64
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+employee = pd.read_csv('data/employee.csv', 
+                       parse_dates=['JOB_DATE', 'HIRE_DATE'], 
+                       index_col='HIRE_DATE')
+sal_avg2 = employee.groupby(['GENDER', pd.Grouper(freq='10AS')])['BASE_SALARY'].mean().round(-2)
+sal_final = sal_avg2.unstack('GENDER')
+sal_final
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>GENDER</th>
+      <th>Female</th>
+      <th>Male</th>
+    </tr>
+    <tr>
+      <th>HIRE_DATE</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1968-01-01</th>
+      <td>NaN</td>
+      <td>106500.0</td>
+    </tr>
+    <tr>
+      <th>1978-01-01</th>
+      <td>57100.0</td>
+      <td>72300.0</td>
+    </tr>
+    <tr>
+      <th>1988-01-01</th>
+      <td>57100.0</td>
+      <td>64600.0</td>
+    </tr>
+    <tr>
+      <th>1998-01-01</th>
+      <td>54700.0</td>
+      <td>59700.0</td>
+    </tr>
+    <tr>
+      <th>2008-01-01</th>
+      <td>47300.0</td>
+      <td>47200.0</td>
+    </tr>
+    <tr>
+      <th>1958-01-01</th>
+      <td>NaN</td>
+      <td>81200.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+employee = pd.read_csv('data/employee.csv', 
+                       parse_dates=['JOB_DATE', 'HIRE_DATE'], 
+                       index_col='HIRE_DATE')
+'resample' in dir(employee.groupby('GENDER'))
+```
+
+
+
+
+    True
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+employee = pd.read_csv('data/employee.csv', 
+                       parse_dates=['JOB_DATE', 'HIRE_DATE'], 
+                       index_col='HIRE_DATE')
+'resample' in dir(employee.groupby('GENDER'))
+```
+
+
+
+
+    True
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+employee = pd.read_csv('data/employee.csv', 
+                       parse_dates=['JOB_DATE', 'HIRE_DATE'], 
+                       index_col='HIRE_DATE')
+years = sal_final.index.year
+years_right = years + 9
+sal_final.index = years.astype(str) + '-' + years_right.astype(str)
+sal_final
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>GENDER</th>
+      <th>Female</th>
+      <th>Male</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1968-1977</th>
+      <td>NaN</td>
+      <td>106500.0</td>
+    </tr>
+    <tr>
+      <th>1978-1987</th>
+      <td>57100.0</td>
+      <td>72300.0</td>
+    </tr>
+    <tr>
+      <th>1988-1997</th>
+      <td>57100.0</td>
+      <td>64600.0</td>
+    </tr>
+    <tr>
+      <th>1998-2007</th>
+      <td>54700.0</td>
+      <td>59700.0</td>
+    </tr>
+    <tr>
+      <th>2008-2017</th>
+      <td>47300.0</td>
+      <td>47200.0</td>
+    </tr>
+    <tr>
+      <th>1958-1967</th>
+      <td>NaN</td>
+      <td>81200.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+employee = pd.read_csv('data/employee.csv', 
+                       parse_dates=['JOB_DATE', 'HIRE_DATE'], 
+                       index_col='HIRE_DATE')
+cuts = pd.cut(employee.index.year, bins=5, precision=0)
+cuts.categories.values
+```
+
+
+
+
+    array([Interval(1958.0, 1970.0, closed='right'),
+           Interval(1970.0, 1981.0, closed='right'),
+           Interval(1981.0, 1993.0, closed='right'),
+           Interval(1993.0, 2004.0, closed='right'),
+           Interval(2004.0, 2016.0, closed='right')], dtype=object)
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+employee = pd.read_csv('data/employee.csv', 
+                       parse_dates=['JOB_DATE', 'HIRE_DATE'], 
+                       index_col='HIRE_DATE')
+cuts = pd.cut(employee.index.year, bins=5, precision=0)
+employee.groupby([cuts, 'GENDER'])['BASE_SALARY'].mean().unstack('GENDER').round(-2)
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>GENDER</th>
+      <th>Female</th>
+      <th>Male</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>(1958.0, 1970.0]</th>
+      <td>NaN</td>
+      <td>85400.0</td>
+    </tr>
+    <tr>
+      <th>(1970.0, 1981.0]</th>
+      <td>54400.0</td>
+      <td>72700.0</td>
+    </tr>
+    <tr>
+      <th>(1981.0, 1993.0]</th>
+      <td>55700.0</td>
+      <td>69300.0</td>
+    </tr>
+    <tr>
+      <th>(1993.0, 2004.0]</th>
+      <td>56500.0</td>
+      <td>62300.0</td>
+    </tr>
+    <tr>
+      <th>(2004.0, 2016.0]</th>
+      <td>49100.0</td>
+      <td>49800.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+crime_sort.index.max()
+```
+
+
+
+
+    Timestamp('2017-09-29 06:16:00')
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+crime_sort = crime_sort[:'2017-8']
+crime_sort.index.max()
+```
+
+
+
+
+    Timestamp('2017-08-31 23:52:00')
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+crime_sort = crime_sort[:'2017-8']
+all_data = crime_sort.groupby([pd.Grouper(freq='M'), 'OFFENSE_CATEGORY_ID']).size()
+all_data.head()
+```
+
+
+
+
+    REPORTED_DATE  OFFENSE_CATEGORY_ID
+    2012-01-31     aggravated-assault     113
+                   all-other-crimes       124
+                   arson                    5
+                   auto-theft             275
+                   burglary               343
+    dtype: int64
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+crime_sort = crime_sort[:'2017-8']
+all_data = crime_sort.groupby([pd.Grouper(freq='M'), 'OFFENSE_CATEGORY_ID']).size()
+all_data = all_data.sort_values().reset_index(name='Total')
+all_data.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>REPORTED_DATE</th>
+      <th>OFFENSE_CATEGORY_ID</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2014-12-31</td>
+      <td>murder</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2013-01-31</td>
+      <td>arson</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2016-05-31</td>
+      <td>murder</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2012-12-31</td>
+      <td>murder</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2016-12-31</td>
+      <td>murder</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+crime_sort = crime_sort[:'2017-8']
+all_data = crime_sort.groupby([pd.Grouper(freq='M'), 'OFFENSE_CATEGORY_ID']).size()
+all_data = all_data.sort_values().reset_index(name='Total')
+goal = all_data[all_data['REPORTED_DATE'] == '2017-8-31'].reset_index(drop=True)
+goal['Total_Goal'] = goal['Total'].mul(.8).astype(int)
+goal.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>REPORTED_DATE</th>
+      <th>OFFENSE_CATEGORY_ID</th>
+      <th>Total</th>
+      <th>Total_Goal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017-08-31</td>
+      <td>murder</td>
+      <td>7</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017-08-31</td>
+      <td>arson</td>
+      <td>7</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017-08-31</td>
+      <td>sexual-assault</td>
+      <td>57</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017-08-31</td>
+      <td>robbery</td>
+      <td>108</td>
+      <td>86</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017-08-31</td>
+      <td>white-collar-crime</td>
+      <td>138</td>
+      <td>110</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+crime_sort = crime_sort[:'2017-8']
+all_data = crime_sort.groupby([pd.Grouper(freq='M'), 'OFFENSE_CATEGORY_ID']).size()
+all_data = all_data.sort_values().reset_index(name='Total')
+goal = all_data[all_data['REPORTED_DATE'] == '2017-8-31'].reset_index(drop=True)
+goal['Total_Goal'] = goal['Total'].mul(.8).astype(int)
+pd.merge_asof(goal, all_data, left_on='Total_Goal', right_on='Total', 
+              by='OFFENSE_CATEGORY_ID', suffixes=('_Current', '_Last'))
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>REPORTED_DATE_Current</th>
+      <th>OFFENSE_CATEGORY_ID</th>
+      <th>Total_Current</th>
+      <th>Total_Goal</th>
+      <th>REPORTED_DATE_Last</th>
+      <th>Total_Last</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017-08-31</td>
+      <td>murder</td>
+      <td>7</td>
+      <td>5</td>
+      <td>2017-01-31</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017-08-31</td>
+      <td>arson</td>
+      <td>7</td>
+      <td>5</td>
+      <td>2012-01-31</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017-08-31</td>
+      <td>sexual-assault</td>
+      <td>57</td>
+      <td>45</td>
+      <td>2013-01-31</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2017-08-31</td>
+      <td>public-disorder</td>
+      <td>878</td>
+      <td>702</td>
+      <td>2015-12-31</td>
+      <td>699</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2017-08-31</td>
+      <td>all-other-crimes</td>
+      <td>1583</td>
+      <td>1266</td>
+      <td>2016-11-30</td>
+      <td>1264</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2017-08-31</td>
+      <td>traffic-accident</td>
+      <td>2126</td>
+      <td>1700</td>
+      <td>2013-12-31</td>
+      <td>1697</td>
+    </tr>
+  </tbody>
+</table>
+<p>15 rows × 6 columns</p>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+crime_sort = crime_sort[:'2017-8']
+all_data = crime_sort.groupby([pd.Grouper(freq='M'), 'OFFENSE_CATEGORY_ID']).size()
+all_data = all_data.sort_values().reset_index(name='Total')
+goal = all_data[all_data['REPORTED_DATE'] == '2017-8-31'].reset_index(drop=True)
+goal['Total_Goal'] = goal['Total'].mul(.8).astype(int)
+crime_sort.index.to_period('M')
+```
+
+
+
+
+    PeriodIndex(['2012-01', '2012-01', '2012-01', '2012-01', '2012-01', '2012-01',
+                 '2012-01', '2012-01', '2012-01', '2012-01',
+                 ...
+                 '2017-08', '2017-08', '2017-08', '2017-08', '2017-08', '2017-08',
+                 '2017-08', '2017-08', '2017-08', '2017-08'],
+                dtype='period[M]', name='REPORTED_DATE', length=453568, freq='M')
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+crime_sort = crime_sort[:'2017-8']
+ad_period = crime_sort.groupby([lambda x: x.to_period('M'), 
+                                'OFFENSE_CATEGORY_ID']).size()
+ad_period = ad_period.sort_values() \
+                     .reset_index(name='Total') \
+                     .rename(columns={'level_0':'REPORTED_DATE'})
+ad_period.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>REPORTED_DATE</th>
+      <th>OFFENSE_CATEGORY_ID</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2014-12</td>
+      <td>murder</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2013-01</td>
+      <td>arson</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2016-05</td>
+      <td>murder</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2012-12</td>
+      <td>murder</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2016-12</td>
+      <td>murder</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+crime_sort = crime_sort[:'2017-8']
+ad_period = crime_sort.groupby([lambda x: x.to_period('M'), 
+                                'OFFENSE_CATEGORY_ID']).size()
+ad_period = ad_period.sort_values() \
+                     .reset_index(name='Total') \
+                     .rename(columns={'level_0':'REPORTED_DATE'})
+cols = ['OFFENSE_CATEGORY_ID', 'Total']
+all_data[cols].equals(ad_period[cols])
+```
+
+
+
+
+    True
+
+
+
+
+```python
+
+```
+
+
+```python
+import pandas as pd
+import numpy as np
+import datetime
+
+%matplotlib inline
+```
+
+
+```python
+crime_sort = pd.read_hdf('data/crime.h5', 'crime') \
+               .set_index('REPORTED_DATE') \
+               .sort_index()
+crime_sort = crime_sort[:'2017-8']
+ad_period = crime_sort.groupby([lambda x: x.to_period('M'), 
+                                'OFFENSE_CATEGORY_ID']).size()
+ad_period = ad_period.sort_values() \
+                     .reset_index(name='Total') \
+                     .rename(columns={'level_0':'REPORTED_DATE'})
+aug_2018 = pd.Period('2017-8', freq='M')
+goal_period = ad_period[ad_period['REPORTED_DATE'] == aug_2018].reset_index(drop=True)
+goal_period['Total_Goal'] = goal_period['Total'].mul(.8).astype(int)
+
+pd.merge_asof(goal_period, ad_period, left_on='Total_Goal', right_on='Total', 
+                  by='OFFENSE_CATEGORY_ID', suffixes=('_Current', '_Last')).head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>REPORTED_DATE_Current</th>
+      <th>OFFENSE_CATEGORY_ID</th>
+      <th>Total_Current</th>
+      <th>Total_Goal</th>
+      <th>REPORTED_DATE_Last</th>
+      <th>Total_Last</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2017-08</td>
+      <td>murder</td>
+      <td>7</td>
+      <td>5</td>
+      <td>2017-01</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2017-08</td>
+      <td>arson</td>
+      <td>7</td>
+      <td>5</td>
+      <td>2012-01</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017-08</td>
+      <td>sexual-assault</td>
+      <td>57</td>
+      <td>45</td>
+      <td>2013-01</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2017-08</td>
+      <td>robbery</td>
+      <td>108</td>
+      <td>86</td>
+      <td>2015-03</td>
+      <td>86</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2017-08</td>
+      <td>white-collar-crime</td>
+      <td>138</td>
+      <td>110</td>
+      <td>2016-10</td>
+      <td>110</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+
+```
