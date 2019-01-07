@@ -1,0 +1,13 @@
+# Teori Pertemuan ke-4
+###Pemodelan Data, Normalisasi, dan Skema Bintang
+Untuk memberikan contoh keputusan desain yang terlibat, kita sering perlu memutuskan sejauh mana tabel harus dinormalisasi . Secara umum, tabel yang dinormalisasi memiliki skema yang lebih sederhana, lebih banyak data terstandarisasi, dan membawa redundansi yang lebih sedikit. Namun, proliferasi tabel yang lebih kecil juga berarti bahwa pelacakan hubungan data membutuhkan lebih banyak ketekunan, pola kueri menjadi lebih kompleks (lebih banyak JOINs), dan ada lebih banyak pipa ETL yang harus dipertahankan.
+
+Di sisi lain, seringkali lebih mudah untuk melakukan kueri dari tabel denormalized (alias tabel lebar), karena semua metrik dan dimensi sudah digabung sebelumnya. Namun, mengingat ukurannya yang lebih besar, pemrosesan data untuk tabel lebar lebih lambat dan melibatkan lebih banyak dependensi hulu. Ini membuat pemeliharaan pipa ETL lebih sulit karena unit kerjanya tidak modular.
+
+Di antara banyak pola desain yang mencoba menyeimbangkan pertukaran ini, salah satu pola yang paling umum digunakan, dan yang kita gunakan di Airbnb , disebut skema bintang . Namanya muncul karena tabel yang diatur dalam skema bintang dapat divisualisasikan dengan pola seperti bintang. Desain ini berfokus pada membangun tabel yang dinormalisasi, khususnya tabel fakta dan dimensi. Ketika diperlukan, tabel denormalized dapat dibangun dari tabel-tabel normalisasi yang lebih kecil ini. Desain ini berusaha untuk keseimbangan antara rawatan ETL dan kemudahan analitik.
+
+###Tabel Fakta & Dimensi
+Untuk memahami bagaimana membangun tabel yang didenormalisasi dari tabel fakta dan tabel dimensi, kita perlu membahas peran mereka masing-masing secara lebih rinci:
+
+* Tabel fakta biasanya berisi data transaksional point-in-time. Setiap baris dalam tabel bisa sangat sederhana dan sering direpresentasikan sebagai unit transaksi. Karena kesederhanaannya, mereka sering menjadi sumber tabel kebenaran dari mana metrik bisnis diturunkan. Misalnya, di Airbnb, kami memiliki berbagai tabel fakta yang melacak acara seperti transaksi seperti pemesanan, pemesanan, perubahan, pembatalan, dan banyak lagi.
+* Tabel dimensi biasanya berisi atribut yang berubah secara perlahan dari entitas tertentu, dan atribut terkadang dapat diatur dalam struktur hierarkis. Atribut ini sering disebut "dimensi", dan dapat digabungkan dengan tabel fakta, selama ada kunci asing yang tersedia di tabel fakta. Di Airbnb, kami membuat berbagai tabel dimensi seperti pengguna, daftar, dan pasar yang membantu kami mengiris dan memotong data kami.
